@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>에스엠씨앤씨 | SM Commerce &amp; Consulting</title>
+<meta name="description" content="국경을 넘어 기업을 잇는 가교, M&amp;A · 투자유치 전문기업 에스엠씨앤씨">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* Layout: advisory-firm site (menu → hero slider → proof → services → deals → reach → CTA), with sub-pages per division. Navy carries the brand; logo green marks "live" states. */
+:root{
+  --navy:#1E2A5E; --navy-2:#2A3A7A; --green:#4E9470; --orange:#E8892F; --sky:#2E9BD6;
+  --bg:#FFFFFF; --bg-2:#F3F5F9; --surface:#FFFFFF; --fg:#141C38; --muted:#5A6684; --line:#DDE3EE;
+  --band:#1E2A5E; --band-fg:#F2F5FB; --band-muted:#B3BDD8; --band-line:rgba(255,255,255,.16);
+  --accent:#2A4C93; --accent-2:#3F8A63; --field:#FFFFFF; --btn:#1E2A5E; --btn-fg:#FFFFFF; --chip:#FFFFFF;
+  --sans:"IBM Plex Sans KR","Noto Sans SC","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --wrap:1200px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1222; --bg-2:#121A30; --surface:#161E37; --fg:#E7ECF7; --muted:#9DA9C6; --line:#29345A;
+  --band:#141D3D; --band-fg:#F2F5FB; --band-muted:#A3AFCF; --band-line:rgba(255,255,255,.12);
+  --accent:#86A8E6; --accent-2:#6DBB92; --field:#0F1529; --btn:#86A8E6; --btn-fg:#0D1222; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1222; --bg-2:#121A30; --surface:#161E37; --fg:#E7ECF7; --muted:#9DA9C6; --line:#29345A;
+  --band:#141D3D; --band-fg:#F2F5FB; --band-muted:#A3AFCF; --band-line:rgba(255,255,255,.12);
+  --accent:#86A8E6; --accent-2:#6DBB92; --field:#0F1529; --btn:#86A8E6; --btn-fg:#0D1222; color-scheme:dark}
+html:lang(zh-CN) body{font-family:"Noto Sans SC","IBM Plex Sans KR",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:80;background:var(--surface)}
+a{color:inherit}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.3}
+p{margin:0}
+ul{margin:0}
+img{max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,a,input,textarea{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ===== header / menu ===== */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:70;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.brand svg{width:28px;height:32px}
+.brand b{font-size:18px;letter-spacing:-.01em;display:block;line-height:1.2}
+.brand small{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.04em;line-height:1.1;font-weight:500}
+nav.menu{display:flex;align-items:stretch;margin-left:auto;align-self:stretch}
+.mi{position:relative;display:flex}
+.mi > a,.mi > button{display:flex;align-items:center;gap:6px;text-decoration:none;font:500 15.5px var(--sans);padding:0 16px;border:0;background:none;color:var(--fg);cursor:pointer;border-bottom:2px solid transparent}
+.mi > button::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);opacity:.6}
+.mi.on > a,.mi.on > button{border-bottom-color:var(--accent);color:var(--accent)}
+.drop{position:absolute;top:100%;left:0;min-width:220px;background:var(--surface);border:1px solid var(--line);border-top:0;box-shadow:0 14px 30px rgba(15,25,60,.12);padding:8px;display:none}
+.mi:hover .drop,.mi:focus-within .drop,.mi.open .drop{display:grid}
+.drop a{text-decoration:none;font-size:14.5px;padding:9px 12px;border-radius:6px;white-space:nowrap}
+.drop a:hover,.drop a[aria-current="page"]{background:var(--bg-2);color:var(--accent)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;flex-shrink:0}
+.lang button{font:500 12.5px var(--mono);border:0;background:none;color:var(--muted);padding:5px 10px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--btn);color:var(--btn-fg)}
+.cta-top{flex-shrink:0;text-decoration:none;font-weight:700;font-size:14.5px;background:var(--btn);color:var(--btn-fg);padding:9px 16px;border-radius:7px}
+.burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);cursor:pointer}
+.burger span,.burger span::before,.burger span::after{display:block;width:18px;height:1.6px;background:currentColor;margin:auto;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.mnav{display:none;border-top:1px solid var(--line);background:var(--surface);max-height:calc(100vh - 72px);overflow:auto}
+.mnav .wrap{display:grid;gap:18px;padding-block:18px 26px}
+.mnav b{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-bottom:4px}
+.mnav a{display:block;text-decoration:none;font-size:16px;padding:7px 0;font-weight:500}
+@media (max-width:1080px){nav.menu,.top .cta-top{display:none}.burger{display:block}.lang{margin-left:0}.mnav.open{display:block}}
+@media (max-width:420px){.brand small{display:none}.lang button{padding:5px 8px}}
+
+/* ===== shared blocks ===== */
+section.sec{padding-block:88px}
+section.sec.tight{padding-block:64px}
+.bg2{background:var(--bg-2)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head > div{display:grid;gap:10px;max-width:46em}
+.sec-head h2{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em}
+.sec-head p{color:var(--muted);font-size:16.5px}
+.link-all{text-decoration:none;font-weight:700;font-size:15px;color:var(--accent);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:700 15px var(--sans);padding:12px 22px;border-radius:8px;border:1px solid transparent;cursor:pointer}
+.btn.p{background:var(--btn);color:var(--btn-fg)}
+.btn.o{border-color:var(--line);color:var(--fg);background:var(--surface)}
+.btn.w{background:#F2F5FB;color:#1E2A5E}
+.btn.g{border-color:rgba(255,255,255,.4);color:#F2F5FB}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+@media (max-width:960px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.grid2,.grid3,.grid4{grid-template-columns:1fr}section.sec{padding-block:60px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px;display:grid;gap:12px;align-content:start;min-width:0}
+.card h3{font-size:20px}
+.card p{color:var(--muted);font-size:15px}
+.ph{margin:0;position:relative;overflow:hidden;border-radius:10px;background:var(--bg-2);min-width:0}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.ph.contain img{object-fit:contain;background:#fff}
+.ph figcaption{font-size:13px;color:var(--muted);padding:8px 2px 0}
+.ph.over figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 9px;color:#fff;background:linear-gradient(transparent,rgba(10,15,35,.78))}
+.bul{list-style:none;padding:0;display:grid;gap:7px}
+.bul li{position:relative;padding-left:16px;font-size:15px}
+.bul li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+.tag{display:inline-block;font:500 12px var(--sans);padding:3px 10px;border-radius:999px;background:var(--bg-2);color:var(--accent);border:1px solid var(--line);white-space:nowrap}
+.tag.live{background:none;border-color:var(--accent-2);color:var(--accent-2)}
+
+/* ===== home hero slider ===== */
+.hero{position:relative;background:var(--band);color:var(--band-fg);overflow:hidden}
+.slide{position:relative;display:none}
+.slide.on{display:block}
+.slide .bgimg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35}
+.slide .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--band) 25%,rgba(30,42,94,.35))}
+.slide .wrap{position:relative;padding-block:110px;display:grid;gap:22px;justify-items:start}
+.slide .eyebrow{color:#9FC3AE}
+.slide h1{font-size:clamp(32px,5vw,58px);font-weight:700;letter-spacing:-.025em;max-width:15em;white-space:pre-line}
+.slide h1 em{font-style:normal;color:#9FC3AE}
+.slide p{font-size:clamp(16px,1.7vw,19px);color:var(--band-muted);max-width:36em}
+.slide .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+@media (prefers-reduced-motion:no-preference){.slide.on .wrap > *{animation:rise .6s both}.slide.on .wrap > *:nth-child(2){animation-delay:.06s}.slide.on .wrap > *:nth-child(3){animation-delay:.12s}.slide.on .wrap > *:nth-child(4){animation-delay:.18s}}
+@keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero-ctl{position:absolute;left:0;right:0;bottom:34px}
+.hero-ctl .wrap{display:flex;align-items:center;gap:16px}
+.hero-ctl .cnt{font:500 13px var(--mono);color:var(--band-muted);min-width:44px}
+.hero-ctl .bars{display:flex;gap:6px}
+.hero-ctl .bars button{width:44px;height:3px;border:0;padding:0;background:rgba(255,255,255,.25);cursor:pointer;border-radius:2px}
+.hero-ctl .bars button[aria-current="true"]{background:#9FC3AE}
+.hero-ctl .pp{border:1px solid rgba(255,255,255,.3);background:none;color:#F2F5FB;border-radius:999px;font:500 12px var(--mono);padding:4px 10px;cursor:pointer}
+@media (max-width:640px){.slide .wrap{padding-block:72px 96px}}
+
+.stats{background:var(--surface);border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:30px 22px;display:grid;gap:2px;min-width:0}
+.stat + .stat{border-left:1px solid var(--line)}
+.stat strong{font-size:clamp(28px,3.4vw,40px);letter-spacing:-.02em;line-height:1.15;color:var(--navy)}
+:root[data-theme="dark"] .stat strong{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stat strong{color:var(--fg)}}
+.stat strong small{font-size:.45em;font-weight:500;margin-left:3px}
+.stat span{font-size:14px;color:var(--muted)}
+@media (max-width:760px){.stats .wrap{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}.stat{padding:22px 14px}}
+
+.biz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.biz article{position:relative;border-radius:14px;overflow:hidden;min-height:420px;color:#F2F5FB;display:flex;flex-direction:column;justify-content:flex-end;background:#1E2A5E}
+.biz article img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.biz article::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,29,61,.1),rgba(20,29,61,.92) 70%)}
+.biz .in{position:relative;padding:30px;display:grid;gap:12px}
+.biz .in .eyebrow{color:#9FC3AE}
+.biz h3{font-size:26px}
+.biz p{color:#C9D2EA;font-size:15px}
+.biz .subs{display:grid;gap:0;margin-top:6px;border-top:1px solid rgba(255,255,255,.2)}
+.biz .subs a{display:flex;justify-content:space-between;gap:12px;text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.2);font-weight:500}
+.biz .subs a span{color:#9FC3AE}
+@media (max-width:860px){.biz{grid-template-columns:1fr}.biz article{min-height:380px}}
+
+/* deal cards */
+.deal{background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-width:0;text-decoration:none;transition:border-color .15s,box-shadow .15s}
+.deal:hover{border-color:var(--accent);box-shadow:0 10px 28px rgba(15,25,60,.08)}
+.deal .top{display:flex;justify-content:space-between;gap:10px;padding:22px 24px 0;flex-wrap:wrap}
+.deal .body{padding:16px 24px 20px;display:grid;gap:10px;flex:1;align-content:start}
+.deal .no{font:500 12px var(--mono);color:var(--muted);letter-spacing:.08em}
+.deal h3{font-size:19px}
+.deal .pair{font-size:14.5px;color:var(--muted)}
+.deal dl{margin:6px 0 0;display:grid;gap:0;border-top:1px solid var(--line)}
+.deal dl div{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.deal dt{color:var(--muted)}
+.deal dd{margin:0;font-weight:500}
+.deal .size{font-size:24px;font-weight:700;letter-spacing:-.01em;color:var(--accent)}
+.deal .go{padding:14px 24px;border-top:1px solid var(--line);font-weight:700;font-size:14.5px;color:var(--accent)}
+
+/* track highlight */
+.hl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.hl a{text-decoration:none;background:var(--band);color:var(--band-fg);border-radius:14px;padding:32px;display:grid;gap:12px;align-content:start}
+.hl .eyebrow{color:#9FC3AE}
+.hl .num{font-size:clamp(52px,6vw,76px);font-weight:700;line-height:1;letter-spacing:-.03em}
+.hl .num small{font-size:.32em;font-weight:500;margin-left:6px;letter-spacing:0}
+.hl p{color:var(--band-muted)}
+.hl .go{font-weight:700;color:#9FC3AE;font-size:14.5px}
+@media (max-width:760px){.hl{grid-template-columns:1fr}}
+
+.reach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.reach .cty{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--fg);margin-top:22px}
+.reach .cty div{padding:16px 10px 0 0;display:grid;gap:2px}
+.reach .cty b{font-size:15px}
+.reach .cty span{font:500 12px var(--mono);color:var(--muted)}
+@media (max-width:860px){.reach{grid-template-columns:1fr}}
+@media (max-width:480px){.reach .cty{grid-template-columns:repeat(3,1fr);row-gap:12px}}
+
+.ctaband{background:var(--band);color:var(--band-fg)}
+.ctaband .wrap{padding-block:64px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h2{font-size:clamp(22px,2.8vw,32px);max-width:20em}
+.ctaband p{color:var(--band-muted);margin-top:8px}
+
+/* ===== sub page header ===== */
+.phead{position:relative;background:var(--band);color:var(--band-fg);overflow:hidden}
+.phead .bgimg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.28}
+.phead .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--band) 30%,rgba(30,42,94,.4))}
+.phead .wrap{position:relative;padding-block:64px 56px;display:grid;gap:12px}
+.crumb{font-size:13px;color:var(--band-muted);display:flex;gap:8px;flex-wrap:wrap}
+.crumb a{text-decoration:none}
+.phead h1{font-size:clamp(28px,4vw,44px);letter-spacing:-.02em}
+.phead p{color:var(--band-muted);max-width:44em;font-size:16.5px}
+.tabs{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 72px);z-index:20}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs a{flex-shrink:0;text-decoration:none;font-weight:500;font-size:15px;padding:16px 16px 14px;border-bottom:2px solid transparent;color:var(--muted)}
+.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent);font-weight:700}
+
+/* overview */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.about .ph{aspect-ratio:4/3}
+.about h2{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em;margin:10px 0 16px}
+.about .lead{color:var(--muted);font-size:16.5px}
+.divs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.divs div{border-top:2px solid var(--accent);padding-top:12px;display:grid;gap:4px}
+.divs div.c2{border-color:var(--accent-2)}
+.divs b{font-size:17px}
+.divs span{font-size:14px;color:var(--muted)}
+.facts3{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border-top:1px solid var(--line)}
+.facts3 div{padding:14px 12px 0 0;display:grid}
+.facts3 dt{font-size:13px;color:var(--muted)}
+.facts3 dd{margin:0;font-weight:700;font-size:17px}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+@media (max-width:460px){.divs,.facts3{grid-template-columns:1fr}}
+
+/* history (deck slide 5) */
+.hist-sec{background:#E6EEF8;--hn:#1F2A5C;--ho:#EE7D2F;--hs:#12A3DA}
+.tl5{position:relative;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));grid-template-rows:auto 72px auto;column-gap:0;padding-left:150px;color:#1F2A5C}
+.tl5-band{grid-row:3;grid-column:1 / -1;position:relative;margin-left:calc(-150px - max(20px,env(safe-area-inset-left,0px)));margin-right:-8px;background:#fff;clip-path:polygon(0 0,calc(100% - 44px) 0,100% 50%,calc(100% - 44px) 100%,0 100%);display:flex;align-items:center;padding-left:max(20px,env(safe-area-inset-left,0px))}
+.tl5-band span{font-weight:700;font-size:clamp(18px,1.9vw,24px);color:var(--hs);letter-spacing:.01em}
+.ev{position:relative;display:contents}
+.ev .ev-txt,.ev .ev-pin,.ev .ev-dot{grid-column:calc(var(--i) + 1)}
+.ev-txt{text-align:center;display:grid;gap:2px;align-content:end;padding:0 2px;min-width:0;z-index:1;width:200%;justify-self:center}
+.ev-txt time{font-size:clamp(20px,2.1vw,28px);font-weight:700;letter-spacing:-.01em;line-height:1.2;color:var(--c)}
+.ev-txt b{font-size:clamp(11.5px,1.05vw,14.5px);font-weight:700;white-space:pre-line;line-height:1.45;color:#1F2A5C}
+.ev.corp{--c:var(--hn)}.ev.adv{--c:var(--ho)}.ev.mkt{--c:var(--hs)}
+.ev-pin{justify-self:center;width:clamp(84px,9vw,128px);aspect-ratio:1;position:relative;z-index:2}
+.ev-pin::before{content:"";position:absolute;inset:0;background:var(--c);border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
+.ev-in{position:absolute;inset:7%;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ev-in img{max-width:62%;max-height:62%;object-fit:contain}
+.ev-in.ny{background:#fff}.ev-in.ny img{max-width:78%;background:#111;padding:4px 5px;border-radius:3px}
+.ev-in.photo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover}
+.ev-in.lg img{max-width:74%;max-height:60%}
+.ev-in.mark img{max-width:58%;max-height:58%}
+.ev-in.badge img{max-width:96%;max-height:96%}
+.ev-in.trophy img{max-height:90%;max-width:90%}
+.ev-dot{justify-self:center;align-self:center;width:18px;height:18px;border-radius:50%;background:var(--c);grid-row:2;z-index:2}
+.ev.up .ev-txt{grid-row:1;padding-bottom:12px}
+.ev.up .ev-pin{grid-row:1;align-self:end;margin-bottom:-30px;display:none}
+.ev.dn .ev-pin::before{border-radius:50% 0 50% 50%;transform:rotate(-45deg)}
+/* grid rows: 1 text-up, 2 pin-up, 3 band, 4 pin-dn, 5 text-dn */
+.tl5{grid-template-rows:auto auto 72px auto auto}
+.ev.up .ev-txt{grid-row:1}
+.ev.up .ev-pin{grid-row:2;display:block;margin:6px 0 -22px}
+.ev .ev-dot{grid-row:3}
+.ev.dn .ev-pin{grid-row:4;margin:-22px 0 6px}
+.ev.dn .ev-txt{grid-row:5;align-content:start;padding-top:12px}
+.ev.up .ev-pin::before{border-radius:50% 50% 0 50%;transform:rotate(45deg)}
+.ev.dn .ev-pin::before{border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+@media (max-width:900px){
+ .tl5{display:block;padding-left:0}
+ .tl5-band{position:static;clip-path:none;border-radius:8px;height:auto;padding:12px 16px;margin-bottom:18px}
+ .ev{display:grid;grid-template-columns:76px 1fr;align-items:center;gap:16px;padding:10px 0 10px 12px;position:relative}
+ .ev .ev-txt,.ev .ev-pin{grid-column:auto;grid-row:auto!important;margin:0!important}
+ .ev .ev-pin{width:76px;order:-1;display:block!important}
+ .ev .ev-txt{text-align:left;padding:0!important;width:auto;justify-self:stretch;display:grid}
+ .tl5-band{margin:0 0 18px!important;padding:14px 18px!important}
+ .ev-dot{display:none}
+ .ev.up .ev-pin::before,.ev.dn .ev-pin::before{border-radius:50% 50% 50% 0;transform:rotate(45deg)}
+}
+/* org */
+.org-tree{display:grid;justify-items:center}
+.org-ceo{background:var(--btn);color:var(--btn-fg);font-weight:700;padding:11px 32px;border-radius:999px}
+.org-stem{width:1px;height:30px;background:var(--line)}
+.org-units{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;border-top:1px solid var(--line);padding-top:30px}
+.org-unit{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;min-width:0}
+.org-unit b{display:block;font-size:16.5px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+@media (max-width:860px){.org-units{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.org-units{grid-template-columns:1fr}}
+
+/* network (deck slide 6) */
+.net{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start;--pin-hq:#1E2A5E;--pin-gm:#1BA1D8;--pin-pt:#F39A3C}
+.map{position:relative;aspect-ratio:1100/1006;max-width:100%;background:#FFFFFF;border-radius:12px;--fg:#16203F;--bg:#FFFFFF;border:1px solid var(--line);--pin-hq:#1E2A5E;--pin-gm:#1BA1D8;--pin-pt:#F39A3C}
+.map img{width:100%;height:100%;display:block;border-radius:12px}
+.map .leader{position:absolute;inset:0;width:100%;height:100%}
+.map .leader line{stroke:var(--pin-gm);stroke-width:.25}
+.pin{position:absolute;width:3.2%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:var(--pin-pt);border:2px solid #fff}
+.pin.hq{width:4.2%;background:var(--pin-hq)}
+.pin.gm{width:2.6%;background:var(--pin-gm)}
+.lbl{position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);white-space:nowrap;font-size:clamp(11px,1.3vw,15px);font-weight:500;color:#16203F;text-shadow:0 0 3px #fff,0 0 3px #fff}
+.lbl.left{left:auto;right:calc(100% + 8px);font-weight:700;font-size:clamp(12px,1.5vw,18px)}
+.map > .lbl.free{transform:translate(0,-50%)}
+.sites{display:grid;min-width:0}
+.sites-head{display:grid;gap:4px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.sites-head b{font-size:clamp(22px,2.6vw,28px);letter-spacing:-.01em}
+.sites-head span{color:var(--accent);font-size:15px}
+.grp{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.site{display:grid;grid-template-columns:130px minmax(0,1fr) 200px;gap:12px;align-items:center;min-height:46px}
+.pn-grid{display:grid;grid-template-columns:130px minmax(0,1fr) 200px;column-gap:12px;row-gap:4px;align-items:center}
+.pn-grid .cat.pn{grid-column:1;grid-row:1 / span 6;align-self:start;margin-top:10px}
+.pn-grid .site.sm{grid-column:2 / 4;grid-template-columns:minmax(0,1fr) 200px}
+.cat{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.cat.pn{align-items:flex-start}
+.cat.pn small{display:block;font-weight:400;font-size:13px;color:var(--muted);line-height:1.4}
+.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;background:var(--pin-pt)}
+.cat.pn .dot{margin-top:8px}
+.dot.hq{background:var(--pin-hq)}
+.dot.sub{background:none;border:2px solid var(--pin-hq)}
+.dot.gm{background:var(--pin-gm)}
+:root[data-theme="dark"] .dot.hq{background:#F2F5FB}:root[data-theme="dark"] .dot.sub{border-color:#F2F5FB}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dot.hq{background:#F2F5FB}:root:not([data-theme="light"]) .dot.sub{border-color:#F2F5FB}}
+.loc{font-size:15px}
+.logo{height:42px;display:flex;align-items:center;justify-content:center;background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:5px 10px}
+.logo img{max-height:100%;max-width:100%;object-fit:contain}
+.logo.txt{font:700 12.5px var(--sans);color:#1E2A5E;text-align:center;line-height:1.25}
+@media (max-width:960px){.net{grid-template-columns:1fr}.map{max-width:560px;justify-self:center;width:100%}}
+@media (max-width:520px){.pn-grid{grid-template-columns:1fr}.pn-grid .cat.pn{grid-row:auto;margin:0 0 4px}.pn-grid .site.sm{grid-column:1;grid-template-columns:1fr 150px}.site{grid-template-columns:1fr 150px}.site:not(.sm){grid-template-areas:"c l" "o l"}.site:not(.sm) .cat{grid-area:c}.site:not(.sm) .loc{grid-area:o;font-size:13.5px;color:var(--muted)}.site:not(.sm) .logo{grid-area:l}}
+
+/* commerce + consulting pages */
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.intro h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin:10px 0 14px}
+.intro .lead{color:var(--muted);font-size:16.5px;margin-bottom:18px}
+@media (max-width:860px){.intro{grid-template-columns:1fr;gap:28px}}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--fg)}
+.steps.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.step{padding:20px 18px 0 0;display:grid;gap:6px;align-content:start;min-width:0}
+.step + .step{padding-left:18px;border-left:1px solid var(--line)}
+.step .n{font:500 13px var(--mono);color:var(--accent)}
+.step b{font-size:16.5px}
+.step span{font-size:14.5px;color:var(--muted)}
+@media (max-width:860px){.steps,.steps.s4{grid-template-columns:1fr 1fr}.step:nth-child(odd){padding-left:0;border-left:0}.step{padding-bottom:18px}}
+@media (max-width:460px){.steps,.steps.s4{grid-template-columns:1fr}.step,.step + .step{padding:16px 0;border-left:0;border-bottom:1px solid var(--line)}}
+.gal{display:grid;gap:10px}
+.gal.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gal.g4 .ph{aspect-ratio:3/4}
+.gal.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gal.g3 .ph{aspect-ratio:1/1}
+.gal.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gal.g2 .ph{aspect-ratio:1000/390}
+@media (max-width:760px){.gal.g4,.gal.g3{grid-template-columns:1fr 1fr}.gal.g2{grid-template-columns:1fr}}
+.result{display:grid;grid-template-columns:minmax(0,360px) 1fr;background:var(--band);color:var(--band-fg);border-radius:14px;overflow:hidden}
+.result .big{padding:36px;display:grid;align-content:space-between;gap:24px;border-right:1px solid var(--band-line)}
+.result .big .eyebrow{color:#9FC3AE}
+.result .num{font-size:clamp(60px,8vw,92px);font-weight:700;line-height:1;letter-spacing:-.03em}
+.result .num small{font-size:.3em;font-weight:500;margin-left:6px;letter-spacing:0}
+.result .big p{color:var(--band-muted)}
+.result dl{margin:0;padding:24px 36px;display:grid}
+.result dl div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--band-line)}
+.result dl div:last-child{border-bottom:0}
+.result dt{font-size:13.5px;color:var(--band-muted)}
+.result dd{margin:0;font-size:15.5px}
+.lots{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.lots span{font:500 12px var(--mono);padding:3px 9px;border-radius:4px;border:1px solid var(--band-line);color:var(--band-muted)}
+.lots span.on{background:#4E9470;border-color:#4E9470;color:#fff}
+@media (max-width:760px){.result{grid-template-columns:1fr}.result .big{border-right:0;border-bottom:1px solid var(--band-line)}.result dl{padding:16px 24px}.result dl div{grid-template-columns:1fr;gap:2px}}
+
+.ptabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.ptabs button{font:500 14px var(--sans);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.ptabs button[aria-pressed="true"]{background:var(--btn);color:var(--btn-fg);border-color:var(--btn)}
+.prod{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;align-items:start}
+.prod > *{min-width:0}
+.prod .imgs{display:grid;gap:10px}
+.prod .imgs .ph{background:#fff;border:1px solid var(--line)}
+.prod .imgs .ph img{object-fit:contain;height:auto}
+.prod .imgs.two{grid-template-columns:1fr 1fr}
+.prod h3{font-size:26px;letter-spacing:-.01em}
+.prod .partner{font-size:14px;color:var(--muted);margin:6px 0 18px}
+.prod .partner b{color:var(--fg);font-weight:500}
+@media (max-width:860px){.prod{grid-template-columns:1fr}}
+.tbl{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:10px}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:440px}
+.tbl th{text-align:left;background:var(--bg-2);font-weight:500;color:var(--muted);padding:10px 12px;white-space:nowrap}
+.tbl td{padding:10px 12px;border-top:1px solid var(--line)}
+.noimg{border:1px dashed var(--line);border-radius:10px;padding:28px;color:var(--muted);font-size:14px;text-align:center;background:var(--bg-2)}
+
+.bars{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:96px 1fr 44px;gap:10px;align-items:center;font-size:13px}
+.bar .track{height:20px;background:var(--bg-2);border-radius:3px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:3px}
+.bar.hi .fill{background:var(--accent-2)}
+.bar .v{font:500 12.5px var(--mono);text-align:right}
+.chart-card h4{font-size:15.5px;margin-bottom:4px}
+.chart-card .src{font-size:12.5px;color:var(--muted)}
+.vbar{display:flex;align-items:flex-end;gap:28px;height:200px;padding:0 10px;border-bottom:1px solid var(--line)}
+.vbar div{flex:1;max-width:110px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:100%}
+.vbar i{display:block;width:100%;background:var(--accent);border-radius:4px 4px 0 0}
+.vbar div.e i{background:var(--accent-2)}
+.vbar b{font:500 13px var(--mono)}
+.vlab{display:flex;gap:28px;padding:8px 10px 0}
+.vlab span{flex:1;max-width:110px;text-align:center;font:500 13px var(--mono);color:var(--muted)}
+.delta{font-size:30px;font-weight:700;color:var(--accent-2)}
+
+.lineup{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;counter-reset:li;border-top:2px solid var(--fg)}
+.lineup li{counter-increment:li;display:grid;gap:4px;padding:18px 0;border-bottom:1px solid var(--line);min-width:0}
+.lineup li b{font-size:16.5px;display:flex;gap:10px;align-items:baseline}
+.lineup li b::before{content:counter(li,decimal-leading-zero);font:500 12.5px var(--mono);color:var(--accent)}
+.lineup li span{font-size:14.5px;color:var(--muted)}
+.gal.pgal{margin-top:36px;grid-template-columns:repeat(6,minmax(0,1fr))}
+.gal.pgal .ph{aspect-ratio:auto;background:#fff;border:1px solid var(--line)}
+.pgal .ph img{height:auto;aspect-ratio:1;object-fit:contain;background:#fff}
+@media (max-width:860px){.gal.pgal{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pgal .ph figcaption{padding:8px 12px;background:var(--surface);font-weight:500;color:var(--fg)}
+@media (max-width:960px){.lineup{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.lineup{grid-template-columns:1fr}}
+.vcg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.vcs{display:grid;grid-template-rows:auto 1fr;gap:12px;min-width:0}
+.vch{background:var(--band);color:var(--band-fg);padding:16px 18px;display:grid;gap:2px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.vcs:first-child .vch{border-radius:8px 0 0 8px}
+.vch .mono{font-size:12px;color:#9FC3AE}
+.vch b{font-size:19px}
+.vch small{font-size:13px;color:var(--band-muted)}
+.vcl{display:grid;gap:8px;align-content:start;background:var(--bg-2);border-radius:10px;padding:12px}
+.vlogo{height:64px;background:#fff;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;padding:10px 16px}
+.vlogo img{max-height:100%;max-width:100%;object-fit:contain}
+@media (max-width:960px){.vcg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.vcg{grid-template-columns:1fr}.vcl{grid-template-columns:1fr 1fr}.vch{clip-path:none;border-radius:8px}}
+/* deals list/detail */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.dd-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
+.dd-side{position:sticky;top:150px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;display:grid;gap:16px}
+.dd-side .size{font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-.02em;line-height:1.1}
+.dd-side dl{margin:0;display:grid}
+.dd-side dl div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+.dd-side dt{color:var(--muted)}
+.dd-side dd{margin:0;font-weight:500}
+.dd-main{display:grid;gap:36px;min-width:0}
+.dd-main h2{font-size:20px;margin-bottom:12px}
+.track-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:t}
+.track-steps div{position:relative;padding-top:24px;font-size:13.5px;color:var(--muted);text-align:center}
+.track-steps div::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--line)}
+.track-steps div::after{content:"";position:absolute;top:0;left:calc(50% - 7px);width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--line)}
+.track-steps div.done{color:var(--fg)}
+.track-steps div.done::before{background:var(--accent-2)}
+.track-steps div.done::after{background:var(--accent-2);border-color:var(--accent-2)}
+.track-steps div.now{color:var(--accent-2);font-weight:700}
+.track-steps div.now::after{background:var(--surface);border-color:var(--accent-2);box-shadow:0 0 0 4px rgba(78,148,112,.2)}
+.note{font-size:13.5px;color:var(--muted);background:var(--bg-2);border-radius:8px;padding:12px 14px}
+@media (max-width:900px){.dd-grid{grid-template-columns:1fr}.dd-side{position:static;order:-1}}
+@media (max-width:520px){.track-steps{grid-template-columns:repeat(5,minmax(0,1fr))}.track-steps div{font-size:11.5px}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px}
+.cinfo dl{margin:0;display:grid;gap:18px}
+.cinfo dt{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.cinfo dd{margin:4px 0 0;font-size:16px}
+.copy{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.copy button{font:500 12px var(--sans);border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:3px 10px;border-radius:5px;cursor:pointer}
+form.inq{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px;display:grid;gap:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.row2{grid-template-columns:1fr}form.inq{padding:22px}}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label,.fld .lb{font-size:14px;font-weight:500}
+.fld em{font-style:normal;color:#C0483D;margin-left:2px}
+.fld input,.fld textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--field);border:1px solid var(--line);border-radius:7px;padding:11px 13px;width:100%}
+.fld textarea{min-height:150px;resize:vertical}
+[aria-invalid="true"]{border-color:#C0483D!important}
+.err{font-size:13px;color:#C0483D}
+.err:empty{display:none}
+.file{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border:1px dashed var(--line);border-radius:7px;padding:12px 14px;background:var(--field)}
+.file label{font-size:14px;font-weight:500;padding:7px 14px;border-radius:6px;background:var(--bg-2);border:1px solid var(--line);cursor:pointer}
+.file input{position:absolute;width:1px;height:1px;opacity:0}
+.file span{font-size:13.5px;color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.agree input{margin-top:5px}
+.notice{border-radius:8px;padding:14px 16px;font-size:14px;background:var(--bg-2);border:1px solid var(--line)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:860px){.cinfo{order:2}}
+
+footer{background:#121A36;color:#A7B1CC;font-size:14px}
+footer .wrap{padding-block:56px 28px;display:grid;gap:36px}
+.fcols{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:28px}
+.fcols b{color:#F2F5FB;display:block;margin-bottom:10px;font-size:14.5px}
+.fcols a{display:block;text-decoration:none;padding:3px 0}
+.fcols a:hover{color:#F2F5FB}
+.fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-size:13px}
+@media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}.fcols > div:first-child{grid-column:1 / -1}}
+.draft-flag{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;font:500 12px var(--mono);background:#C87A2E;color:#fff;padding:6px 12px;border-radius:999px;letter-spacing:.05em;pointer-events:none}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="SMC&amp;C">
+      <svg viewBox="0 0 30 34" aria-hidden="true"><rect x="0" y="12" width="13" height="22" rx="2.5" fill="#34599A"/><rect x="17" y="12" width="13" height="22" rx="2.5" fill="#34599A"/><rect x="8.5" y="0" width="13" height="16" rx="2.5" fill="#4E9470"/><circle cx="15" cy="13" r="1.6" fill="#fff"/></svg>
+      <span><b data-u="brand">에스엠씨앤씨</b><small>SM Commerce &amp; Consulting</small></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="main"></nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="l-ko" data-l="ko" aria-pressed="true">KO</button>
+      <button type="button" id="l-en" data-l="en" aria-pressed="false">EN</button>
+      <button type="button" id="l-zh" data-l="zh" aria-pressed="false">中文</button>
+    </div>
+    <a class="cta-top" href="#contact" data-u="contact">상담 요청</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span></button>
+  </div>
+  <div class="mnav" id="mnav"><div class="wrap" id="mnavIn"></div></div>
+</header>
+
+<main id="app"></main>
+
+<footer><div class="wrap" id="foot"></div></footer>
+
+
+<script>
+/* ---------- i18n ---------- */
+let L="ko";
+const x=o=>o==null?"":(typeof o==="string"?o:(o[L]??o.ko));
+const T=(ko,en,zh)=>({ko,en,zh});
+const U={
+brand:T("에스엠씨앤씨","SMC&C","SMC&C"),draft:T("시안 · DRAFT","DRAFT","样稿 · DRAFT"),
+home:T("홈","Home","首页"),about:T("회사소개","About","公司介绍"),overview:T("회사 개요","Overview","公司概况"),history:T("연혁","History","发展历程"),organization:T("조직 구성","Organization","组织架构"),network:T("글로벌 네트워크","Global network","全球网络"),
+commerce:T("커머스 사업부","Commerce","贸易事业部"),plant:T("제조설비","Production lines","生产设备"),equipment:T("장비","Equipment","设备"),parts:T("부품 · 소재","Parts & materials","零部件 · 材料"),
+consulting:T("컨설팅 사업부","Consulting","咨询事业部"),advisory:T("컨설팅 사업 구조","Advisory services","咨询业务结构"),valuechain:T("기판 밸류체인","Substrate value chain","基板价值链"),track:T("핵심 성과","Track record","核心业绩"),
+deals:T("M&A 기회보기","M&A opportunities","并购机会"),contact:T("상담 요청","Contact us","咨询洽谈"),
+viewAll:T("전체 보기 →","View all →","查看全部 →"),more:T("자세히 보기 →","Learn more →","了解更多 →"),
+};
+const NAV=[
+ {k:"about",kids:["overview","history","organization","network"]},
+ {k:"commerce",kids:["plant","equipment","parts"]},
+ {k:"consulting",kids:["advisory","valuechain","track","deals"]},
+];
+const GROUP={overview:"about",history:"about",organization:"about",network:"about",plant:"commerce",equipment:"commerce",parts:"commerce",advisory:"consulting",valuechain:"consulting",track:"consulting",deals:"consulting"};
+
+/* ---------- content ---------- */
+const HERO=[
+ {img:"img/hq.jpg",eb:"M&A · Investment Advisory",
+  h:T("국경을 넘어 기업을 잇는 가교,\n<em>M&A · 투자유치 전문기업</em>","Bridging companies across borders:\n<em>M&A and investment advisory</em>","跨越国界连接企业的桥梁，\n<em>专业并购 · 投资引进机构</em>"),
+  p:T("기술을 가진 기업과 성장 자본을 가진 기업을 찾아 연결하고, 거래가 성사될 때까지 함께합니다.","We find and connect companies with technology and companies with growth capital, and stay with them until the deal is done.","我们为拥有技术的企业与拥有成长资本的企业牵线搭桥，并陪伴交易直至达成。"),
+  c:[["#contact",T("상담 요청","Contact us","咨询洽谈"),"w"],["#deals",T("M&A 기회보기","See opportunities","查看并购机会"),"g"]]}
+];
+const STATS=[
+ {n:"500",u:T("억원","B KRW ×0.1","亿韩元"),un:T("억원","× 100M KRW","亿韩元"),l:T("국제 합작계약 체결","Cross-border JV signed","跨国合资协议签署")},
+ {n:"113",un:T("대","units","台"),l:T("반도체 설비 수출 계약","Fab tools under export contract","半导体设备出口合同")},
+ {n:"8",un:T("곳","sites","处"),l:T("5개국 글로벌 거점","Global sites in 5 countries","5国全球据点")},
+ {n:"100",un:T("억원+","× 100M KRW+","亿韩元+"),l:T("2026.07 매출 돌파","Revenue passed (Jul 2026)","2026.07 销售额突破")},
+];
+const DIV={
+ commerce:{img:"img/fab1.jpg",eb:"Commerce",h:U.commerce,
+  p:T("반도체 장비·소재·부품 무역, 중고 장비와 공정 설비의 매각·이전, 해외 수출입을 수행합니다.","Trade in semiconductor equipment, materials and parts, sale and relocation of used tools and process lines, and import and export.","从事半导体设备·材料·零部件贸易、二手设备及工艺设备的出售与搬迁以及进出口业务。")},
+ consulting:{img:"img/hq.jpg",eb:"Consulting",h:U.consulting,
+  p:T("기업 인수·합병(M&A) 자문과 해외 투자 자문으로 국경을 넘는 투자와 합작을 연결합니다.","M&A and cross-border investment advisory that connects investment and joint ventures across borders.","通过并购咨询与海外投资咨询，促成跨国投资与合资。")},
+};
+const HIST=[
+ {d:"2022.06",c:"corp",pos:"up",t:T("NY Enterprise 설립","NY Enterprise founded","NY Enterprise成立"),img:"img/h/ny.png",k:"ny"},
+ {d:"2022.12",c:"mkt",pos:"dn",t:T("대만 T社 · 일본 S社 진입","Entered Company T (Taiwan) and Company S (Japan)","进入台湾T公司 · 日本S公司"),img:"img/h/electrode.png",k:"photo"},
+ {d:"2025.04",c:"adv",pos:"up",t:T("중국 상장사\nJ Group 자문사 선정","Advisor to Chinese listed\nJ Group","获选中国上市公司\nJ Group顾问"),img:"img/h/handshake.svg",k:"icon"},
+ {d:"2025.07",c:"adv",pos:"dn",t:T("한국 상장사 M社\n자문사 선정","Advisor to Korean listed\nCompany M","获选韩国上市公司\nM公司顾问"),img:"img/h/handshake.svg",k:"icon"},
+ {d:"2025.11",c:"adv",pos:"up",t:T("일본 상장사 T社\n자문사 선정","Advisor to Japanese listed\nCompany T","获选日本上市公司\nT公司顾问"),img:"img/h/handshake.svg",k:"icon"},
+ {d:"2026.05",c:"corp",pos:"dn",t:T("에스엠씨앤씨 주식회사로\n사명 변경","Renamed SM Commerce &\nConsulting Co., Ltd.","更名为SM Commerce &\nConsulting株式会社"),img:"img/h/smcnc.png",k:"lg"},
+ {d:"2026.07",c:"mkt",pos:"up",t:T("매출 100억원 돌파","Revenue passed KRW 10 billion","销售额突破100亿韩元"),img:"img/h/growth.svg",k:"icon"},
+ {d:"2026.09",c:"corp",pos:"dn",t:T("자회사 Semiquity Private\nInvestment Association 설립","Subsidiary Semiquity Private\nInvestment Association established","设立子公司Semiquity Private\nInvestment Association"),img:"img/h/semiquity.png",k:"mark"},
+ {d:"2026.11",c:"corp",pos:"up",t:T("SM CNC\n벤처기업 인증 획득","SM CNC certified\nas a venture company","SM CNC\n获得风险企业认证"),img:"img/h/venture.png",k:"badge"},
+ {d:"2027.12",c:"mkt",pos:"dn",t:T("천만불 수출의 탑\n수상 (예정)","US$10 Million Export Tower\naward (expected)","千万美元出口塔奖\n（预计）"),img:"img/h/trophy.png",k:"trophy"},
+];
+const ORG=[
+ [T("커머스 사업부","Commerce Division","贸易事业部"),[T("반도체 장비·소재·부품 무역","Equipment, materials & parts trade","半导体设备·材料·零部件贸易"),T("중고장비·설비 매각 및 이전","Used tool sale & relocation","二手设备出售及搬迁")]],
+ [T("컨설팅 사업부","Consulting Division","咨询事业部"),[T("M&A 컨설팅","M&A advisory","并购咨询"),T("해외투자 컨설팅","Cross-border investment advisory","海外投资咨询")]],
+ [T("소재개발 연구소","Materials R&D Lab","材料研发中心"),[T("Photo Resist 소재 개발","Photoresist development","光刻胶材料研发"),T("반도체용 기판 소재 개발","Semiconductor substrate materials","半导体基板材料研发")]],
+ [T("경영기획실","Management Planning","经营企划室"),[T("재무 · 회계","Finance & accounting","财务 · 会计"),T("인사 · 총무","HR & general affairs","人事 · 总务")]],
+];
+const DEALS=[
+ {id:1,type:"equity",tag:T("지분투자","Equity investment","股权投资"),title:T("반도체 기업 지분투자 구조 자문","Equity structuring for a semiconductor company","半导体企业股权投资结构咨询"),
+  pair:T("국내 반도체 기업 × 중국 상장사","Korean semiconductor company × Chinese listed company","韩国半导体企业 × 中国上市公司"),
+  ind:T("반도체","Semiconductor","半导体"),inv:T("해외 상장사 (SI)","Overseas listed company (SI)","海外上市公司（SI）"),
+  size:T("1,000억원","KRW 100B","1,000亿韩元"),date:"2026.11",stage:4,status:T("합작사 설립 진행 중","JV being formed","合资公司设立中"),
+  sum:T("국내 반도체 기업에 해외 상장사가 지분을 투자하고, 이후 현지 합작법인 설립까지 이어지는 거래입니다.","A listed overseas company invests in a Korean semiconductor company, followed by a local joint venture.","海外上市公司向韩国半导体企业进行股权投资，随后设立当地合资公司。"),
+  pts:[T("홍콩 SPC를 통한 신주 인수 구조 설계","Structuring a new-share subscription via a Hong Kong SPC","设计通过香港SPC认购新股的结构"),T("투자 후 지분·이사회 구성안 마련","Post-deal shareholding and board composition plan","制定投资后股权及董事会构成方案"),T("실적 약정·기업가치 조정 조건 협의","Negotiating earn-out and valuation adjustment terms","协商业绩承诺及估值调整条件"),T("중국 현지 합작법인 설립 구상","Planning a joint venture in China","规划在中国设立当地合资公司")]},
+ {id:2,type:"entry",tag:T("시장 공동진출","Joint market entry","共同市场进入"),title:T("전자소재 기업 해외 시장 공동진출 자문","Joint market entry for an electronic-materials company","电子材料企业共同进入海外市场咨询"),
+  pair:T("국내 전자소재 화학기업 × 중국 산업그룹","Korean electronic-materials chemical company × Chinese industrial group","韩国电子材料化学企业 × 中国产业集团"),
+  ind:T("전자소재 · 화학","Electronic materials · Chemicals","电子材料 · 化工"),inv:T("해외 산업그룹 (SI)","Overseas industrial group (SI)","海外产业集团（SI）"),
+  size:T("300억원","KRW 30B","300亿韩元"),date:"2026.10",stage:2,status:T("제안 · 협의 진행 중","Proposal · in discussion","提案 · 洽谈中"),
+  sum:T("해외 산업그룹의 투자를 유치하고, 그룹 계열사를 초기 판로로 연결해 현지 시장에 함께 진출하는 거래입니다.","Bringing in investment from an overseas industrial group and using its affiliates as first customers to enter the market together.","引进海外产业集团投资，并以集团关联公司作为初期销售渠道，共同进入当地市场。"),
+  pts:[T("중국 산업그룹의 투자 유치 구조 제안","Proposing an investment structure for the industrial group","提出中国产业集团投资引进结构"),T("투자 후 중국 현지 자회사 설립 구상","Planning a local subsidiary after investment","规划投资后设立中国当地子公司"),T("그룹 계열사를 초기 판로로 연계","Linking group affiliates as initial sales channels","以集团关联公司作为初期销售渠道"),T("NDA → MOU → 투자계약 추진","NDA → MOU → investment agreement","推进NDA → MOU → 投资协议")]},
+ {id:3,type:"jv",tag:T("합작법인","Joint venture","合资公司"),title:T("포토레지스트 현지화 자문","Photoresist localization advisory","光刻胶本地化咨询"),
+  pair:T("국내 포토레지스트 기업 × 중국 투자사","Korean photoresist company × Chinese investor","韩国光刻胶企业 × 中国投资方"),
+  ind:T("반도체 소재 (포토레지스트)","Semiconductor materials (photoresist)","半导体材料（光刻胶）"),inv:T("해외 투자사 (FI)","Overseas investor (FI)","海外投资机构（FI）"),
+  size:T("600억원","KRW 60B","600亿韩元"),date:"2026.10",stage:2,status:T("제안 · 검토 진행 중","Proposal · under review","提案 · 评估中"),
+  sum:T("반도체 회로를 새기는 감광액(포토레지스트) 기술을 가진 국내 기업과 해외 투자사가 현지 합작법인을 세우는 거래입니다.","A Korean company with photoresist technology (the light-sensitive coating used to pattern chips) and an overseas investor set up a local joint venture.","拥有光刻胶（用于在芯片上刻画电路的感光材料）技术的韩国企业与海外投资方共同设立当地合资公司。"),
+  pts:[T("중국 현지 합작법인 설립 구조 제안","Proposing a local joint venture structure","提出中国当地合资公司设立结构"),T("기술 이전형 · 현지 개발형 협력안 설계","Designing technology-transfer and local-development options","设计技术转让型 · 当地开发型合作方案"),T("한국 기술 파트너 발굴 · 검증","Finding and vetting Korean technology partners","寻找并验证韩国技术伙伴"),T("현지 평가 Lab · 고객 인증 연계 구상","Planning a local evaluation lab and customer qualification","规划当地评估实验室及客户认证对接")]},
+];
+const STAGES=[T("제안","Proposal","提案"),T("협의","Discussion","洽谈"),T("MOU","MOU","MOU"),T("계약","Agreement","签约"),T("설립 · 실행","Closing","设立 · 执行")];
+
+const PARTS=[
+ {k:"pr",name:"Photo Resist · BARC",d:T("반도체 회로 모양을 빛으로 새길 때 쓰는 감광액(PR)과, 빛 반사를 막는 바닥막(BARC)입니다.","Photoresist (PR) is the light-sensitive coating used to print circuit patterns; BARC is the layer underneath that stops light reflecting back.","光刻胶（PR）是用光刻画电路图形的感光材料；BARC是防止光反射的底层涂膜。")},
+ {k:"etch",name:"Etch Chamber Parts",d:T("반도체 웨이퍼를 깎아내는 식각 장비 안쪽에 들어가는 핵심 부품입니다. 상부 전극, 각종 링, 쿼츠, 실리콘, 소켓, EMI 부품을 공급합니다.","Core parts inside etch chambers, the tools that carve patterns into wafers: upper electrodes, rings, quartz, silicone, sockets and EMI parts.","用于刻蚀设备腔体内部的核心部件：上电极、各类环件、石英、硅胶、插座及EMI部件。")},
+ {k:"sic",name:"Si / SiC Parts",d:T("식각 장비에서 소모되는 실리콘(Si)·탄화규소(SiC) 부품입니다.","Silicon (Si) and silicon carbide (SiC) consumables for etch tools.","刻蚀设备用硅（Si）· 碳化硅（SiC）耗材。")},
+ {k:"quartz",name:"Quartz Parts",d:T("고온과 화학물질을 견디는 석영(쿼츠)으로 만든 장비 부품입니다.","Equipment parts made of quartz, which withstands heat and chemicals.","由耐高温、耐化学腐蚀的石英制成的设备部件。")},
+ {k:"gasket",name:"Gasket · TIM · Socket · EMI",d:T("장비 부품 사이의 열을 전달하고, 틈을 막고, 전기 신호 간섭을 막아주는 부품입니다.","Parts that move heat between components, seal gaps and block electrical interference.","用于部件间导热、密封间隙及屏蔽电信号干扰的部件。")},
+ {k:"cvd",name:"CVD Heater · ESC",d:T("웨이퍼를 데우는 히터와, 정전기로 웨이퍼를 붙잡아 두는 척(ESC)입니다.","Heaters that warm the wafer, and electrostatic chucks (ESC) that hold it in place.","加热晶圆的加热器，以及利用静电固定晶圆的静电吸盘（ESC）。")},
+ {k:"mfc",name:"MFC · Vacuum Gauge · Valve",d:T("공정 가스의 양을 정밀하게 조절하고, 진공 압력을 재는 제어 부품입니다.","Control parts that meter process gas precisely and measure vacuum pressure.","精确控制工艺气体流量并测量真空压力的控制部件。")},
+ {k:"pvd",name:"PVD · ALD",d:T("웨이퍼 위에 아주 얇은 막을 입히는 증착 장비입니다.","Deposition tools that coat wafers with very thin films.","在晶圆上沉积极薄膜层的沉积设备。")},
+ {k:"cmp",name:"CMP Slurry",d:T("웨이퍼 표면을 평평하게 갈아내는 공정(CMP)에 쓰는 연마액입니다.","Slurries for CMP, the step that polishes the wafer surface flat.","用于将晶圆表面研磨平整的工艺（CMP）的抛光液。")}
+];
+
+/* ---------- render helpers ---------- */
+const $=s=>document.querySelector(s);
+const ph=(src,cap,cls="")=>`<figure class="ph ${cls}"><img src="${src}" alt="${cap?x(cap):""}" loading="lazy"></figure>`;
+const bul=a=>`<ul class="bul">${a.map(i=>`<li>${x(i)}</li>`).join("")}</ul>`;
+function phead(route,title,desc,img){
+  const g=GROUP[route];
+  const crumbs=[`<a href="#home">${x(U.home)}</a>`];
+  if(g)crumbs.push(`<span>›</span><span>${x(U[g])}</span>`);
+  crumbs.push(`<span>›</span><span>${x(title)}</span>`);
+  let tabs="";
+  if(g){const n=NAV.find(n=>n.k===g);tabs=`<nav class="tabs" aria-label="${x(U[g])}"><div class="wrap">${n.kids.map(k=>`<a href="#${k}"${k===route?' aria-current="page"':""}>${x(U[k])}</a>`).join("")}</div></nav>`}
+  return `<section class="phead">${img?`<div class="bgimg" style="background-image:url(${img})"></div>`:""}<div class="wrap"><div class="crumb">${crumbs.join("")}</div><h1>${x(title)}</h1>${desc?`<p>${x(desc)}</p>`:""}</div></section>${tabs}`;
+}
+function dealCard(d){
+  return `<a class="deal" href="#deal-${d.id}"><div class="top"><span class="tag">${x(d.tag)}</span><span class="tag live">${x(d.status)}</span></div>
+  <div class="body"><span class="no">CASE ${String(d.id).padStart(2,"0")} · ${d.date}</span><h3>${x(d.title)}</h3><p class="pair">${x(d.pair)}</p>
+  <div class="size">${x(d.size)}</div>
+  <dl><div><dt>${x(TX.ind)}</dt><dd>${x(d.ind)}</dd></div><div><dt>${x(TX.inv)}</dt><dd>${x(d.inv)}</dd></div></dl></div>
+  <span class="go">${x(U.more)}</span></a>`;
+}
+const TX={
+ ind:T("업종","Industry","行业"),inv:T("투자자","Investor","投资方"),size:T("거래 규모","Deal size","交易规模"),stage:T("진행 단계","Stage","进展阶段"),upd:T("업데이트","Updated","更新"),loc:T("대상 소재지","Target location","标的所在地"),kr:T("한국","Korea","韩国"),
+ sum:T("거래 개요","Overview","交易概要"),pts:T("주요 자문 내용","Our advisory work","主要咨询内容"),prog:T("진행 현황","Progress","进展情况"),ask:T("이 건 문의하기","Ask about this deal","咨询此项目"),back:T("← 목록으로","← Back to list","← 返回列表"),
+ conf:T("고객사 보호를 위해 회사명은 공개하지 않습니다. 상세 자료는 비밀유지계약(NDA) 체결 후 제공합니다.","Company names are confidential. Details are shared after a non-disclosure agreement (NDA).","为保护客户，不公开公司名称。详细资料将在签署保密协议（NDA）后提供。"),
+ all:T("전체","All","全部"),
+};
+
+/* ---------- pages ---------- */
+const P={};
+let heroTimer=null,heroIdx=0,heroPaused=false;
+P.home=()=>{
+  const slides=HERO.map((s,i)=>`<div class="slide${i===0?" on":""}" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i+1} / ${HERO.length}"><div class="bgimg" style="background-image:url(${s.img})"></div><div class="wrap"><div class="eyebrow">${s.eb}</div><h1>${x(s.h)}</h1><p>${x(s.p)}</p><div class="ctas">${s.c.map(c=>`<a class="btn ${c[2]}" href="${c[0]}">${x(c[1])}</a>`).join("")}</div></div></div>`).join("");
+  const stats=STATS.map(s=>`<div class="stat"><strong class="mono">${s.n}<small>${x(s.un)}</small></strong><span>${x(s.l)}</span></div>`).join("");
+  const biz=(k,kids)=>{const d=DIV[k];return `<article><img src="${d.img}" alt=""><div class="in"><div class="eyebrow">${d.eb}</div><h3>${x(d.h)}</h3><p>${x(d.p)}</p><div class="subs">${kids.map(c=>`<a href="#${c}">${x(U[c])}<span>→</span></a>`).join("")}</div></div></article>`};
+  return `<section class="hero" aria-roledescription="carousel">${slides}
+</section>
+  <section class="stats"><div class="wrap">${stats}</div></section>
+  <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Business</div><h2>${x(T("두 개의 사업부, 하나의 네트워크","Two divisions, one network","两大事业部，一张网络"))}</h2><p>${x(T("거래를 연결하는 컨설팅과, 거래를 실행하는 커머스가 함께 움직입니다.","Consulting connects the deal; Commerce executes the trade.","咨询负责促成交易，贸易负责执行交易，两者协同运作。"))}</p></div></div>
+  <div class="biz">${biz("consulting",["advisory","valuechain","track","deals"])}${biz("commerce",["plant","equipment","parts"])}</div></div></section>
+  <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Latest opportunities</div><h2>${x(U.deals)}</h2><p>${x(T("현재 진행 중인 투자·합작 기회입니다.","Investment and joint venture opportunities in progress.","目前正在进行的投资 · 合资机会。"))}</p></div><a class="link-all" href="#deals">${x(U.viewAll)}</a></div>
+  <div class="grid3">${DEALS.map(dealCard).join("")}</div></div></section>
+  <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Track record</div><h2>${x(U.track)}</h2></div></div>
+  <div class="hl"><a href="#track"><div class="eyebrow">${x(T("국제 합작법인 설립 자문","Cross-border JV advisory","跨国合资公司设立咨询"))}</div><div class="num">500<small>${x(T("억원","× 100M KRW","亿韩元"))}</small></div><p>${x(T("규모의 합작계약(JVA) 체결 완료 · 성공보수 확정","Joint venture agreement signed · success fee confirmed","规模的合资协议（JVA）已签署 · 成功报酬确定"))}</p><span class="go">${x(U.more)}</span></a>
+  <a href="#plant"><div class="eyebrow">${x(T("반도체 생산 설비 수출 계약","Fab tool export contract","半导体生产设备出口合同"))}</div><div class="num">113<small>${x(T("대","units","台"))}</small></div><p>${x(T("설비 매입부터 해외 현지 재설치까지 일괄 수행","End to end, from purchase to reinstallation abroad","从设备收购到海外当地重装一揽子执行"))}</p><span class="go">${x(U.more)}</span></a></div></div></section>
+  <section class="sec bg2"><div class="wrap reach"><div><div class="eyebrow">Global reach</div><h2 style="font-size:clamp(26px,3.2vw,36px);margin:10px 0 12px">${x(T("5개국 8개 거점","8 sites in 5 countries","5国8处据点"))}</h2><p style="color:var(--muted)">${x(T("한국 본사와 자회사, 제조 기지, 그리고 해외 협업망이 하나의 네트워크로 움직입니다.","Our headquarters, subsidiary, manufacturing base and overseas partners work as one network.","总部、子公司、制造基地与海外合作网络作为一个整体协同运作。"))}</p>
+  <div class="cty">${[["KR",T("한국","Korea","韩国"),"3"],["CN",T("중국","China","中国"),"3"],["TW",T("대만","Taiwan","台湾"),"1"],["JP",T("일본","Japan","日本"),"1"],["SG",T("싱가포르","Singapore","新加坡"),"1"]].map(c=>`<div><span>${c[0]}</span><b>${x(c[1])}</b></div>`).join("")}</div>
+  <p style="margin-top:22px"><a class="link-all" href="#network">${x(U.network)} →</a></p></div>${mapHTML()}</div></section>
+  ${ctaBand()}`;
+};
+function ctaBand(){return `<section class="ctaband"><div class="wrap"><div><h2>${x(T("M&A · 투자유치를 검토 중이신가요?","Considering M&A or raising investment?","正在考虑并购或引进投资吗？"))}</h2><p>${x(T("문의 내용은 비밀로 다루며, 담당 이사가 직접 회신드립니다.","All inquiries are confidential and answered by a director.","咨询内容严格保密，由负责理事直接回复。"))}</p></div><a class="btn w" href="#contact">${x(U.contact)}</a></div></section>`}
+
+P.overview=()=>phead("overview",U.overview,null,"img/hq.jpg")+`<section class="sec"><div class="wrap about">${ph("img/hq.jpg",T("본사 · 경기도 화성시 동탄","Headquarters · Dongtan, Hwaseong","总部 · 京畿道华城市东滩"))}<div><div class="eyebrow">About us</div><h2>${x(T("글로벌 네트워크로 기업의 다음 성장을 연결합니다","Connecting companies to their next stage of growth through a global network","以全球网络助力企业迈向下一阶段的成长"))}</h2>
+ <p class="lead">${x(T("에스엠씨앤씨는 산업 현장에 필요한 장비와 부품을 공급하는 커머스 사업과, 기업의 인수·합병과 해외 투자를 돕는 컨설팅 사업을 함께 운영합니다.","SMC&C runs Commerce, supplying the equipment and parts that industry needs, and Consulting, helping companies with M&A and overseas investment.","SMC&C同时经营为产业现场供应设备与零部件的贸易业务，以及协助企业并购与海外投资的咨询业务。"))}</p>
+ <div class="divs"><div><b>${x(U.commerce)}</b><span>${x(T("산업 장비·부품 공급, 설비 이전, 해외 무역","Industrial equipment and parts, line relocation, international trade","产业设备·零部件供应、设备搬迁、海外贸易"))}</span></div><div class="c2"><b>${x(U.consulting)}</b><span>${x(T("기업 인수·합병(M&A) 자문, 기업 간 해외 투자 연결","M&A advisory, connecting cross-border investment","并购咨询，促成企业间海外投资"))}</span></div></div>
+ <dl class="facts3"><div><dt>${x(T("설립","Founded","成立"))}</dt><dd class="mono">2022.06</dd></div><div><dt>${x(T("소재지","Location","所在地"))}</dt><dd>${x(T("경기도 화성시 동탄","Dongtan, Hwaseong","京畿道华城市东滩"))}</dd></div><div><dt>${x(T("매출","Revenue","销售额"))}</dt><dd>${x(T("100억원 돌파 (2026.07)","KRW 10B+ (Jul 2026)","突破100亿韩元（2026.07）"))}</dd></div></dl></div></div></section>`+ctaBand();
+
+P.history=()=>phead("history",U.history,T("2022년 설립 이후의 주요 발자취입니다.","Key milestones since 2022.","2022年成立以来的主要历程。"),"img/hq.jpg")+`<section class="sec hist-sec"><div class="wrap">
+ <div class="tl5"><div class="tl5-band"><span>SINCE 2022</span></div>
+ ${HIST.map((e,i)=>`<div class="ev ${e.pos} ${e.c}" style="--i:${i}"><div class="ev-txt"><time>${e.d}</time><b>${x(e.t)}</b></div><div class="ev-pin"><span class="ev-in ${e.k}"><img src="${e.img}" alt=""></span></div><i class="ev-dot"></i></div>`).join("")}
+ </div></div></section>`;
+P.organization=()=>phead("organization",U.organization,null,"img/hq.jpg")+`<section class="sec"><div class="wrap"><div class="org-tree"><div class="org-ceo">${x(T("대표이사","CEO","总经理"))}</div><div class="org-stem"></div><div class="org-units">${ORG.map(o=>`<div class="org-unit"><b>${x(o[0])}</b>${bul(o[1])}</div>`).join("")}</div></div></div></section>`;
+
+function mapHTML(){return `<div class="map" aria-hidden="true"><img src="img/map.png" alt=""><svg class="leader" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="67.17" y1="31.09" x2="70" y2="21"/></svg>
+ <span class="pin hq" style="left:65.03%;top:28.59%"><b class="lbl left">${x(T("본사(화성)","HQ (Hwaseong)","总部（华城）"))}</b></span>
+ <span class="pin gm" style="left:67.17%;top:31.09%"></span><b class="lbl free" style="left:70%;top:17.5%">${x(T("구미","Gumi","龟尾"))}</b>
+ <span class="pin" style="left:49.16%;top:39.53%"><b class="lbl">${x(T("우한","Wuhan","武汉"))}</b></span>
+ <span class="pin" style="left:48.88%;top:51.88%"><b class="lbl">${x(T("심천 · 홍콩","Shenzhen · Hong Kong","深圳 · 香港"))}</b></span>
+ <span class="pin" style="left:58.17%;top:47.97%"><b class="lbl">${x(T("타이베이","Taipei","台北"))}</b></span>
+ <span class="pin" style="left:80.89%;top:31.25%"><b class="lbl">${x(T("도쿄","Tokyo","东京"))}</b></span>
+ <span class="pin" style="left:36.02%;top:81.56%"><b class="lbl">${x(T("싱가포르","Singapore","新加坡"))}</b></span></div>`}
+P.network=()=>{
+  const hq=T("한국 경기도 화성시 동탄","Dongtan, Hwaseong, Gyeonggi, Korea","韩国京畿道华城市东滩");
+  const pn=[[T("중국 우한","Wuhan, China","中国武汉"),"湖北融芯达科技有限公司"],[T("중국 심천","Shenzhen, China","中国深圳"),"img/lg-nearzenith.png"],[T("중국 홍콩","Hong Kong, China","中国香港"),"ZFX International Limited"],[T("대만 타이베이","Taipei, Taiwan","台湾台北"),"img/lg-yieldcome.png"],[T("일본 도쿄","Tokyo, Japan","日本东京"),"img/lg-sunrise.png"],[T("싱가포르","Singapore","新加坡"),"MAXCESS HOLDINGS PTE. LTD."]];
+  const logo=v=>v.startsWith("img/")?`<span class="logo"><img src="${v}" alt=""></span>`:`<span class="logo txt">${v}</span>`;
+  return phead("network",U.network,T("한국 본사를 중심으로 5개국 8개 거점이 하나의 네트워크로 움직입니다.","Centered on our Korean headquarters, 8 sites in 5 countries work as one network.","以韩国总部为中心，5国8处据点作为一个网络协同运作。"),"img/hq.jpg")+`<section class="sec"><div class="wrap net">${mapHTML()}
+  <div class="sites"><div class="sites-head"><b>${x(T("5개국 · 8개 거점","5 countries · 8 sites","5国 · 8处据点"))}</b><span>${x(T("한국 · 중국 · 대만 · 일본 · 싱가포르","Korea · China · Taiwan · Japan · Singapore","韩国 · 中国大陆 · 台湾 · 日本 · 新加坡"))}</span></div>
+  <div class="grp"><div class="site"><span class="cat"><i class="dot hq"></i>${x(T("본사","Headquarters","总部"))}</span><span class="loc">${x(hq)}</span>${logo("img/lg-smcnc.png")}</div>
+  <div class="site"><span class="cat"><i class="dot sub"></i>${x(T("자회사","Subsidiary","子公司"))}</span><span class="loc">${x(hq)}</span>${logo("img/lg-semiquity.png")}</div></div>
+  <div class="grp"><div class="site"><span class="cat"><i class="dot gm"></i>${x(T("외주 제조기지","Contract manufacturing","外包制造基地"))}</span><span class="loc">${x(T("한국 경상북도 구미시","Gumi, Gyeongbuk, Korea","韩国庆尚北道龟尾市"))}</span>${logo("img/lg-eraetech.png")}</div></div>
+  <div class="grp"><div class="pn-grid"><div class="cat pn"><i class="dot"></i><span>${x(T("협업망","Partners","合作网络"))}<small>Partnership<br>Network</small></span></div>
+  ${pn.map(p=>`<div class="site sm"><span class="loc">${x(p[0])}</span>${logo(p[1])}</div>`).join("")}</div></div></div></div></section>`;
+};
+
+const comIntro=(eb,h,lead,pts,side)=>`<section class="sec"><div class="wrap intro"><div><div class="eyebrow">${eb}</div><h2>${x(h)}</h2><p class="lead">${x(lead)}</p>${bul(pts)}</div>${side}</div></section>`;
+const stepsHTML=(a,cls="")=>`<div class="steps ${cls}">${a.map((s,i)=>`<div class="step"><span class="n">${String(i+1).padStart(2,"0")}</span><b>${x(s[0])}</b><span>${x(s[1])}</span></div>`).join("")}</div>`;
+
+P.plant=()=>phead("plant",U.plant,T("공정 설비를 매입·이전 또는 수출하고, 해외 현지에 다시 설치합니다.","We buy process equipment, relocate or export it, and reinstall it abroad.","收购工艺设备，进行搬迁或出口，并在海外当地重新安装。"),"img/fab1.jpg")+
+ comIntro("Commerce · 01",T("설비 매입부터 현지 재설치까지","From purchase to reinstallation","从设备收购到当地重装"),T("국내 공장의 공정 설비를 골라 매입하고, 검증·해체·포장·물류를 거쳐 해외 고객 공장에서 다시 가동하기까지 직접 관리합니다.","We select and buy process tools from Korean fabs, then handle verification, teardown, packing and logistics until they run again in the customer's plant.","挑选并收购韩国工厂的工艺设备，经过验证、拆机、包装、物流，直至在海外客户工厂重新投产，全程直接管理。"),
+  [T("신규 · 메인 공정 설비 매입","Purchase of new and main process tools","收购新设备及主要工艺设备"),T("검증 · 해체","Verification and teardown","验证 · 拆机"),T("포장 · 물류 · 수출 등 무역 업무","Packing, logistics and export","包装 · 物流 · 出口等贸易业务"),T("현지 설치 등 기술 지원","On-site installation support","当地安装等技术支持")],
+  ph("img/fab2.jpg",T("이전 대상 반도체 설비","Semiconductor tool for relocation","待搬迁的半导体设备"),"over").replace('class="ph over"','class="ph over" style="aspect-ratio:4/3"'))+
+ `<section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Process</div><h2>${x(T("설비 이전 5단계","Five steps of a line relocation","设备搬迁五个阶段"))}</h2></div></div>
+ ${stepsHTML([[T("설비 발굴 · 매입","Sourcing","寻源 · 收购"),T("국내 공정 설비 선별 · 매입 계약","Selecting tools and signing purchase","筛选设备并签订收购合同")],[T("설비 검증","Verification","设备验证"),T("설비 상태 · 사양 · 가동 이력 확인","Condition, spec and run history","确认状态 · 规格 · 运行记录")],[T("해체 · 포장","Teardown","拆机 · 包装"),T("해체 · 포장 (도급)","Teardown and packing (contracted)","拆机 · 包装（外包）")],[T("포장 · 수출 · 운송","Export & shipping","包装 · 出口 · 运输"),T("해외 수출을 위한 절차 진행","Export procedures and freight","办理出口相关手续")],[T("현지 재설치","Reinstallation","当地重装"),T("해외 고객 공장 설치 · 시운전","Installation and start-up at the customer's plant","海外客户工厂安装 · 试运行")]])}
+ <div class="gal g4" style="margin-top:36px">${ph("img/fab1.jpg",T("클린룸 생산 라인","Cleanroom production line","洁净室生产线"),"over")}${ph("img/fab2.jpg",T("이전 대상 반도체 설비","Semiconductor tool for relocation","待搬迁的半导体设备"),"over")}${ph("img/fab3.jpg",T("이전 대상 계측 설비","Metrology tool for relocation","待搬迁的量测设备"),"over")}${ph("img/fab4.jpg",T("해체 · 포장 후 출하 대기","Crated and awaiting shipment","拆机包装后待出货"),"over")}</div></div></section>
+ <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("커머스 사업부 핵심 성과","Commerce key result","贸易事业部核心业绩"))}</h2></div></div>
+ <div class="result"><div class="big"><div class="eyebrow">${x(T("2026 계약 체결","Contract signed 2026","2026年签约"))}</div><div class="num">113<small>${x(T("대","units","台"))}</small></div><p>${x(T("반도체 생산 설비 해외 수출 계약","Export contract for semiconductor production tools","半导体生产设备出口合同"))}</p></div>
+ <dl><div><dt>${x(T("계약 범위","Scope","合同范围"))}</dt><dd>${x(T("설비 매입부터 중국 현지 재설치까지 일괄 수행","End to end, from purchase to reinstallation in China","从设备收购到中国当地重装一揽子执行"))}</dd></div>
+ <div><dt>${x(T("설비 구성","Tools","设备构成"))}</dt><dd>${x(T("국내 중견기업 보유 설비 25대 + 신규 설비 88대","25 tools from a Korean mid-size maker + 88 new tools","韩国中坚企业持有设备25台 + 新设备88台"))}</dd></div>
+ <div><dt>${x(T("수행 절차","Process","执行流程"))}</dt><dd>${x(T("매입 → 검증 · 해체 · 물류 → 현지 재설치 → 인수검사","Purchase → verification, teardown, logistics → reinstallation → acceptance","收购 → 验证 · 拆机 · 物流 → 当地重装 → 验收"))}</dd></div>
+ <div><dt>${x(T("실행 방식","Execution","执行方式"))}</dt><dd>${x(T("3개 Lot 순차 실행 · 3개사 협업","Three lots in sequence, three partner firms","分3批依次执行 · 3家公司协作"))}<div class="lots"><span class="on">LOT 1 · 2026</span><span>LOT 2 · 2027</span><span>LOT 3 · 2028</span></div></dd></div>
+ <div><dt>${x(T("진행 현황","Status","进展"))}</dt><dd>${x(T("2026년 신규 설비 88대 수출 (11월 예정), 나머지 메인 공정 설비는 2027~28년 2차로 수출","88 new tools ship in November 2026; the main process tools follow in 2027–28","2026年88台新设备出口（预计11月），其余主要工艺设备于2027~28年分批出口"))}</dd></div></dl></div></div></section>`;
+
+P.equipment=()=>phead("equipment",U.equipment,T("반도체 신장비를 해외 제조사에서 구매해 국내에 판매하거나 수출합니다.","We purchase new semiconductor equipment from overseas makers for sale in Korea or for export.","从海外制造商采购半导体新设备，在国内销售或出口。"),"img/eq-ship3.jpg")+
+ comIntro("Commerce · 02",T("해외 제조사 신장비 공급","New equipment from overseas makers","海外厂商新设备供应"),T("분석 장비, 환경시험 챔버, 전자현미경 등 반도체 연구·생산에 필요한 신장비를 제조사에서 직접 구매해 검수 후 납품합니다.","We buy new tools such as analyzers, environmental chambers and electron microscopes directly from the maker, inspect them and deliver.","直接向制造商采购分析设备、环境试验箱、电子显微镜等半导体研发与生产所需的新设备，经验收后交付。"),
+  [T("해외 제조사 신장비 직접 구매","Direct purchase from OEMs","直接向海外厂商采购新设备"),T("입고 · 검수 및 품질 확인","Receiving inspection and QC","入库 · 验收及质量确认"),T("국내 고객사 판매 · 납품","Sales and delivery to Korean customers","向国内客户销售 · 交付"),T("수출 포장 · 해외 선적","Export packing and shipping","出口包装 · 海外装运")],
+  `<div class="gal g3" style="grid-template-columns:1fr 1fr">${ph("img/eq-espec.jpg",T("ESPEC 환경시험 챔버","ESPEC environmental test chamber","ESPEC环境试验箱"),"contain")}${ph("img/eq-tescan.jpg",T("Tescan 전자현미경","Tescan electron microscope","Tescan电子显微镜"),"contain")}</div>`)+
+ `<section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Process</div><h2>${x(T("장비 공급 5단계","Five steps of equipment supply","设备供应五个阶段"))}</h2></div></div>
+ ${stepsHTML([[T("신장비 발주 · 구매","Order & purchase","新设备订购 · 采购"),T("해외 제조사 직접 구매","Direct from the OEM","直接向海外厂商采购")],[T("입고 · 검수","Receiving & inspection","入库 · 验收"),T("창고 입고 · 품질 확인","Warehousing and QC","仓库入库 · 质量确认")],[T("국내 판매 · 납품","Domestic delivery","国内销售 · 交付"),T("국내 고객사 공급 · 납품","Supply to Korean customers","向国内客户供应 · 交付")],[T("수출 포장","Export packing","出口包装"),T("목재 크레이트 포장","Wooden crate packing","木箱包装")],[T("해외 선적 · 운송","Shipping","海外装运 · 运输"),T("컨테이너 선적 · 납품","Container shipping and delivery","集装箱装运 · 交付")]])}</div></section>
+ <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Gallery</div><h2>${x(T("공급 장비와 출하 현장","Equipment and shipments","供应设备与出货现场"))}</h2></div></div>
+ <div class="gal" style="grid-template-columns:2fr 1.5fr 1fr;align-items:stretch">${ph("img/eq-metrohm.jpg",T("Metrohm 분석 장비","Metrohm analyzers","Metrohm分析设备"),"contain")}${ph("img/eq-espec.jpg",T("ESPEC 환경시험 챔버","ESPEC environmental test chamber","ESPEC环境试验箱"),"contain")}${ph("img/eq-tescan.jpg",T("Tescan 전자현미경","Tescan electron microscope","Tescan电子显微镜"),"contain")}</div>
+ <div class="gal g2" style="margin-top:12px">${ph("img/eq-ship1.jpg",T("입고 검수 팔레트","Pallets at receiving inspection","入库验收托盘"),"over")}${ph("img/eq-ship2.jpg",T("선적 대기 화물","Cargo awaiting shipment","待装运货物"),"over")}${ph("img/eq-ship3.jpg",T("수출 목재 포장","Wooden export packing","出口木箱包装"),"over")}${ph("img/eq-ship4.jpg",T("수출 크레이트","Export crates","出口木箱"),"over")}</div></div></section>`;
+
+P.parts=()=>phead("parts",U.parts,T("반도체 정밀부품 · 소재와 전자부품을 한국 제조사에서 찾아 해외 제조사에 공급합니다.","We source precision semiconductor parts, materials and electronic components from Korean makers and supply them abroad.","从韩国制造商寻源半导体精密零部件 · 材料及电子元器件，供应给海外制造商。"),"img/fab3.jpg")+
+ `<section class="sec"><div class="wrap intro"><div><div class="eyebrow">Commerce · 03</div><h2>${x(T("반도체 공정 전반의 부품 · 소재","Parts and materials across the fab process","覆盖半导体全工艺的零部件 · 材料"))}</h2><p class="lead">${x(T("반도체 공정에 들어가는 소모품과 핵심 부품을 검증된 제조 파트너와 함께 공급합니다.","With proven manufacturing partners, we supply consumables and key components used across the fab process.","与经过验证的制造伙伴一起，供应半导体工艺所需的耗材与核心部件。"))}</p></div>
+ ${bul([T("한국 제조사 소싱 · 품질 확인","Korean supplier sourcing and QC","韩国厂商寻源 · 质量确认"),T("통신 · 전원 · 로봇 · 가전 고객 대상","Customers in telecom, power, robotics and appliances","面向通信 · 电源 · 机器人 · 家电客户"),T("수출 통관 · 물류 관리","Export customs and logistics","出口报关 · 物流管理"),T("결제 · 납기 일원화","Single point for payment and delivery","付款 · 交期统一管理")])}</div></section>
+ <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Product line-up</div><h2>${x(T("제품 라인업","Product line-up","产品阵容"))}</h2></div></div>
+ <ol class="lineup">${PARTS.map(a=>`<li><b>${a.name}</b><span>${x(a.d)}</span></li>`).join("")}</ol>
+ <div class="gal g3 pgal">${[["img/g-showerhead.jpg","Showerhead"],["img/g-focusring.jpg","Focus Ring"],["img/g-cring.jpg","C-Ring"],["img/g-qboat.jpg","Quartz Boat"],["img/g-qtube.jpg","Quartz Tube"],["img/g-heater.jpg","CVD Heater"]].map(g=>ph(g[0],g[1])).join("")}</div></div></section>`+ctaBand();
+
+P.advisory=()=>phead("advisory",U.advisory,T("투자자를 찾는 일부터 계약 체결과 현지 법인 설립까지, 거래의 처음과 끝을 함께합니다.","From finding investors to signing and setting up the local entity, we stay with the deal from start to finish.","从寻找投资方到签约及设立当地法人，全程参与交易。"),"img/hq.jpg")+
+ `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Services</div><h2>${x(T("국경을 넘는 거래를 처음부터 끝까지","Cross-border deals, from first contact to closing","跨境交易，从开始到完成"))}</h2><p>${x(T("언어와 제도, 기업 문화가 다른 나라의 기업 사이에서 상대를 찾고, 조건을 맞추고, 계약을 마무리합니다.","Between companies from countries with different languages, rules and cultures, we find the counterpart, align the terms and close.","在语言、制度与企业文化各不相同的各国企业之间，寻找合作方、协调条件并完成签约。"))}</p></div></div>
+ <div class="grid3">${[[T("M&A 자문","M&A advisory","并购咨询"),T("기업을 사고팔거나 지분을 인수하려는 기업에 맞는 상대를 찾고, 거래 구조와 조건 협상을 돕습니다.","For companies looking to buy, sell or take a stake, we find the right counterpart and support structuring and negotiation.","为有意收购、出售企业或取得股权的公司寻找合适对象，并协助交易结构与条件谈判。")],[T("투자유치","Investment raising","投资引进"),T("성장 자금이 필요한 기업과 해외 상장사, 산업그룹, 투자사를 연결합니다.","We connect companies that need growth capital with listed companies, industrial groups and investors abroad.","为需要成长资金的企业对接海外上市公司、产业集团及投资机构。")],[T("합작법인 · 해외 진출","Joint ventures & market entry","合资公司 · 海外拓展"),T("서로 다른 나라의 기업이 함께 세우는 합작법인과 현지 법인 설립, 해외 시장 공동 진출을 지원합니다.","We support cross-border joint ventures, local entity set-up and joint market entry.","支持跨国合资公司及当地法人设立，共同进入海外市场。")]].map(c=>`<div class="card"><h3>${x(c[0])}</h3><p>${x(c[1])}</p></div>`).join("")}</div></div></section>
+ <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">How we work</div><h2>${x(T("컨설팅 사업 구조","How an engagement runs","咨询业务结构"))}</h2></div></div>
+ ${stepsHTML([[T("파트너 발굴 · 검증","Partner search & vetting","伙伴寻找 · 验证"),T("중국 상장사 · 산업그룹 등 투자자를 찾고 검증합니다.","We find and vet investors such as listed companies and industrial groups.","寻找并验证上市公司、产业集团等投资方。")],[T("거래 구조 설계","Deal structuring","交易结构设计"),T("지분투자 · 합작법인 등 양측에 맞는 구조를 설계합니다.","Equity investment, joint venture or other structures that fit both sides.","设计股权投资、合资公司等适合双方的结构。")],[T("조건 협상 지원","Negotiation","条件谈判支持"),T("기업가치 · 지분율 · 지배구조 협상을 지원합니다.","Valuation, shareholding and governance terms.","支持企业估值、持股比例、治理结构谈判。")],[T("계약 · 실행 지원","Signing & execution","签约 · 执行支持"),T("MOU · 투자계약 체결과 현지 법인 설립을 돕습니다.","MOU and investment agreements, and local entity set-up.","协助签署MOU · 投资协议及设立当地法人。")]],"s4")}</div></section>`+ctaBand();
+
+const VC=[
+ ["FCCL",T("소재","Materials","材料"),["ube","dupont","pi","lscable","posco"]],
+ ["S-FCCL",T("연성 동박적층판","Flexible copper-clad laminate","挠性覆铜板"),["flexion","toray","sumitomo"]],
+ ["COF",T("필름 기판","Chip-on-film","薄膜基板"),["lginnotek","stemco","chipbond","chipfilm","flexceed","leadertech","jmc"]],
+ ["Driver IC",T("구동칩","Display driver chip","驱动芯片"),["lxsemicon","steco","novatek","synaptics","himax","magnachip"]],
+];
+P.valuechain=()=>phead("valuechain",U.valuechain,T("반도체용 기판(Substrate) 밸류체인 안의 기업과 투자자를 연결합니다.","We connect companies and investors along the semiconductor substrate value chain.","连接半导体基板价值链中的企业与投资方。"),"img/hq.jpg")+
+ `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Substrate value chain</div><h2>${x(T("소재부터 구동칩까지, 밸류체인 전체와 연결합니다","From materials to driver chips, connected across the whole chain","从材料到驱动芯片，连接整条价值链"))}</h2></div></div>
+ <div class="vcg">${VC.map((c,i)=>`<div class="vcs"><div class="vch"><span class="mono">0${i+1}</span><b>${c[0]}</b><small>${x(c[1])}</small></div><div class="vcl">${c[2].map(k=>`<span class="vlogo"><img src="img/vc/${k}.png" alt="${k}" loading="lazy"></span>`).join("")}</div></div>`).join("")}</div>
+ <p class="note" style="margin-top:24px">${x(T("각 단계의 주요 기업과 투자자 · 수요처를 연결하며, M&A 자문 · 지분투자 구조 자문 · 합작법인 설립 · 해외 시장 공동진출을 지원합니다.","We connect leading companies at each stage with investors and buyers, supporting M&A, equity structuring, joint ventures and joint market entry.","连接各环节主要企业与投资方 · 需求方，支持并购咨询 · 股权结构咨询 · 合资公司设立 · 共同进入海外市场。"))}</p></div></section>`+ctaBand();
+
+P.track=()=>phead("track",U.track,T("국경을 넘는 거래를 성사시킨 주요 실적입니다.","Key cross-border deals we have closed.","我们促成的主要跨境交易业绩。"),"img/hq.jpg")+
+ `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("컨설팅 사업부 핵심 성과","Consulting key result","咨询事业部核心业绩"))}</h2></div></div>
+ <div class="result"><div class="big"><div class="eyebrow">${x(T("국제 합작법인 설립 자문","Cross-border JV advisory","跨国合资公司设立咨询"))}</div><div class="num">500<small>${x(T("억원","× 100M KRW","亿韩元"))}</small></div><p>${x(T("규모의 합작계약 체결 완료 · 성공보수 확정","Joint venture agreement signed · success fee confirmed","规模的合资协议已签署 · 成功报酬确定"))}</p></div>
+ <dl><div><dt>${x(T("당사자","Parties","当事方"))}</dt><dd>${x(T("S사(한국) × J사(중국)","Company S (Korea) × Company J (China)","S公司（韩国）× J公司（中国）"))}</dd></div>
+ <div><dt>${x(T("거래 내용","Transaction","交易内容"))}</dt><dd>${x(T("합작법인(JV) 설립 및 합작계약(JVA) 체결","Joint venture (JV) formation and JVA signing","设立合资公司（JV）并签署合资协议（JVA）"))}</dd></div>
+ <div><dt>${x(T("자문 범위","Scope","咨询范围"))}</dt><dd>${x(T("파트너 검증 · JV 구조 설계 · 조건 협상 · 계약 검토","Partner vetting · JV structuring · negotiation · contract review","伙伴验证 · JV结构设计 · 条件谈判 · 合同审查"))}</dd></div>
+ <div><dt>${x(T("계약 형태","Fee basis","合同形式"))}</dt><dd>${x(T("성공보수형 (Success Fee) · 성공보수 확정","Success fee · confirmed","成功报酬制（Success Fee）· 成功报酬已确定"))}</dd></div></dl></div>
+ <div class="grid3" style="margin-top:20px">${HIST.filter(e=>e.c==="adv").map(e=>`<div class="card"><span class="mono" style="color:var(--orange);font-weight:500">${e.d}</span><h3 style="font-size:17px;white-space:pre-line">${x(e.t)}</h3></div>`).join("")}</div></div></section>
+ <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">In progress</div><h2>${x(U.deals)}</h2></div><a class="link-all" href="#deals">${x(U.viewAll)}</a></div><div class="grid3">${DEALS.map(dealCard).join("")}</div></div></section>`;
+
+let dealFilter="all";
+P.deals=()=>{
+  const types=[["all",TX.all],["equity",DEALS[0].tag],["entry",DEALS[1].tag],["jv",DEALS[2].tag]];
+  const list=DEALS.filter(d=>dealFilter==="all"||d.type===dealFilter);
+  return phead("deals",U.deals,T("현재 진행 중인 투자 · 합작 기회입니다. 관심 있는 건은 상담을 요청해 주세요.","Investment and joint venture opportunities in progress. Contact us about any deal that interests you.","目前正在进行的投资 · 合资机会。如有兴趣，请联系我们。"),"img/fab4.jpg")+
+  `<section class="sec"><div class="wrap"><div class="filters ptabs" role="group">${types.map(t=>`<button type="button" data-filter="${t[0]}" aria-pressed="${dealFilter===t[0]}">${x(t[1])}</button>`).join("")}</div>
+  <div class="grid3">${list.map(dealCard).join("")}</div><p class="note" style="margin-top:24px">${x(TX.conf)}</p></div></section>`+ctaBand();
+};
+P.deal=id=>{
+  const d=DEALS.find(a=>a.id===id);if(!d)return P.deals();
+  return phead("deals",d.title,d.pair,"img/fab4.jpg").replace(`<span>${x(d.title)}</span>`,`<a href="#deals">${x(U.deals)}</a><span>›</span><span>CASE ${String(d.id).padStart(2,"0")}</span>`)+
+  `<section class="sec"><div class="wrap dd-grid"><div class="dd-main">
+   <div><a class="link-all" href="#deals">${x(TX.back)}</a></div>
+   <div><h2>${x(TX.sum)}</h2><p>${x(d.sum)}</p></div>
+   <div><h2>${x(TX.pts)}</h2>${bul(d.pts)}</div>
+   <div><h2>${x(TX.prog)}</h2><div class="track-steps">${STAGES.map((s,i)=>`<div class="${i<d.stage-1?"done":i===d.stage-1?"now":""}">${x(s)}</div>`).join("")}</div><p style="margin-top:14px;font-weight:500">${d.date} · ${x(d.status)}</p></div>
+   <p class="note">${x(TX.conf)}</p></div>
+   <aside class="dd-side"><span class="tag" style="justify-self:start">${x(d.tag)}</span><div><div style="font-size:13px;color:var(--muted)">${x(TX.size)}</div><div class="size">${x(d.size)}</div></div>
+   <dl><div><dt>${x(TX.ind)}</dt><dd>${x(d.ind)}</dd></div><div><dt>${x(TX.inv)}</dt><dd>${x(d.inv)}</dd></div><div><dt>${x(TX.loc)}</dt><dd>${x(TX.kr)}</dd></div><div><dt>${x(TX.stage)}</dt><dd>${x(d.status)}</dd></div><div><dt>${x(TX.upd)}</dt><dd class="mono">${d.date}</dd></div></dl>
+   <a class="btn p" href="#contact" data-ask="${d.id}" style="justify-content:center">${x(TX.ask)}</a></aside></div></section>`;
+};
+
+let askDeal=null;
+P.contact=()=>phead("contact",U.contact,T("M&A, 투자유치, 합작 진출, 장비 · 부품 공급에 관한 문의를 남겨 주시면 담당자가 회신드립니다. 문의 내용은 비밀로 다룹니다.","Send us your inquiry about M&A, investment, joint ventures or equipment and parts. All inquiries are confidential.","如有并购、投资引进、合资拓展或设备 · 零部件供应方面的问题，请留言。咨询内容严格保密。"),"img/hq.jpg")+
+ `<section class="sec"><div class="wrap contact"><div class="cinfo"><dl>
+ <div><dt>${x(T("담당","Contact person","负责人"))}</dt><dd>${x(T("남덕인 이사","Daniel Nam, Director","Daniel Nam 理事"))}</dd></div>
+ <div><dt>${x(T("이메일","Email","邮箱"))}</dt><dd class="copy"><span id="mail">daniel.nam@sm-cnc.kr</span><button type="button" id="copyMail">${x(T("복사","Copy","复制"))}</button></dd></div>
+ <div><dt>${x(T("주소","Address","地址"))}</dt><dd>${x(ADDR)}</dd></div></dl></div>
+ <form class="inq" id="inq" novalidate>
+ <div class="row2"><div class="fld"><label for="f-email">${x(F.fe)}<em>*</em></label><input id="f-email" type="email" autocomplete="email" placeholder="name@company.com"><div class="err" id="e-email"></div></div>
+ <div class="fld"><label for="f-phone">${x(F.fp)}<em>*</em></label><input id="f-phone" type="tel" autocomplete="tel" placeholder="+82 10-0000-0000"><div class="err" id="e-phone"></div></div></div>
+ <div class="fld"><label for="f-subj">${x(F.fs)}<em>*</em></label><input id="f-subj" type="text"><div class="err" id="e-subj"></div></div>
+ <div class="fld"><label for="f-body">${x(F.fb)}<em>*</em></label><textarea id="f-body"></textarea><div class="err" id="e-body"></div></div>
+ <div class="fld"><span class="lb">${x(F.fa)}</span><div class="file"><label for="f-file">${x(F.pick)}</label><input id="f-file" type="file"><span id="fileName">${x(F.none)}</span></div><div class="err" id="e-file"></div></div>
+ <label class="agree" for="f-agree"><input id="f-agree" type="checkbox"><span>${x(F.ag)}</span></label><div class="err" id="e-agree"></div>
+ <button class="btn p" type="submit" style="justify-self:start">${x(F.send)}</button><div class="notice" id="done" hidden></div></form></div></section>`;
+const ADDR=T("경기도 화성시 동탄구 동탄영천로 150, A동 1302–1305호","Units 1302–1305, Bldg A, 150 Dongtanyeongcheon-ro, Dongtan-gu, Hwaseong-si, Gyeonggi-do, Korea","韩国京畿道华城市东滩区东滩永川路150号 A栋1302–1305室");
+const F={fe:T("이메일","Email","邮箱"),fp:T("연락처","Phone","联系电话"),fs:T("제목","Subject","标题"),fb:T("내용","Message","内容"),fa:T("첨부파일","Attachment","附件"),pick:T("파일 선택","Choose file","选择文件"),none:T("선택된 파일 없음 · 최대 10MB","No file selected · up to 10 MB","未选择文件 · 最大10MB"),
+ ag:T("문의 회신을 위해 이메일과 연락처를 수집 · 이용하는 데 동의합니다.","I agree that my email and phone number may be used to reply to this inquiry.","同意为回复咨询而收集和使用我的邮箱及联系电话。"),send:T("문의 보내기","Send inquiry","提交咨询"),
+ req:T("필수 입력 항목입니다.","This field is required.","此项为必填项。"),mail:T("이메일 형식을 확인해 주세요.","Check the email address.","请检查邮箱格式。"),size:T("10MB 이하 파일만 첨부할 수 있습니다.","Files must be 10 MB or smaller.","仅可上传10MB以下的文件。"),agree:T("동의가 필요합니다.","Please agree to continue.","请勾选同意。"),
+ ok:T("입력 내용이 확인되었습니다. 지금은 시안이라 실제로 발송되지는 않으며, 가비아에 올릴 때 메일 발송 기능을 연결합니다.","Your inquiry passed all checks. This is a draft, so nothing is sent yet; email delivery will be connected when the site goes live.","内容已确认。目前为样稿，不会实际发送；正式上线时将接入邮件发送功能。"),
+ copied:T("복사됨","Copied","已复制")};
+
+/* ---------- chrome ---------- */
+function renderChrome(route){
+  const g=GROUP[route]||(route==="deal"?"consulting":route);
+  $("#menu").innerHTML=NAV.map(n=>n.kids?`<div class="mi${g===n.k?" on":""}"><button type="button" aria-haspopup="true">${x(U[n.k])}</button><div class="drop">${n.kids.map(k=>`<a href="#${k}"${k===route?' aria-current="page"':""}>${x(U[k])}</a>`).join("")}</div></div>`:`<div class="mi${g===n.k?" on":""}"><a href="#${n.k}">${x(U[n.k])}</a></div>`).join("");
+  $("#mnavIn").innerHTML=NAV.map(n=>n.kids?`<div><b>${x(U[n.k])}</b>${n.kids.map(k=>`<a href="#${k}">${x(U[k])}</a>`).join("")}</div>`:`<div><a href="#${n.k}">${x(U[n.k])}</a></div>`).join("")+`<div><a class="btn p" href="#contact" style="display:inline-flex">${x(U.contact)}</a></div>`;
+  $("#foot").innerHTML=`<div class="fcols"><div><b>${x(T("에스엠씨앤씨 주식회사","SM Commerce & Consulting Co., Ltd.","SM Commerce & Consulting株式会社"))}</b><p>${x(ADDR)}</p><p style="margin-top:8px">daniel.nam@sm-cnc.kr</p></div>
+  ${NAV.map(n=>`<div><b>${x(U[n.k])}</b>${n.kids.map(k=>`<a href="#${k}">${x(U[k])}</a>`).join("")}</div>`).join("")}<div><b>${x(U.contact)}</b><a href="#contact">${x(U.contact)}</a></div></div>
+  <div class="fbot"><span>© 2026 SMC&amp;C. All rights reserved.</span><span>Commerce | Consulting</span></div>`;
+  document.querySelectorAll("[data-u]").forEach(el=>el.textContent=x(U[el.dataset.u]));
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
+  document.documentElement.lang=L==="zh"?"zh-CN":L;
+}
+
+/* ---------- router ---------- */
+const ROUTES=["home","overview","history","organization","network","plant","equipment","parts","advisory","valuechain","track","deals","contact"];
+let cur="home";
+function render(keepScroll){
+  const h=(location.hash||"#home").slice(1);
+  let route=h,html;
+  const m=/^deal-(\d+)$/.exec(h);
+  if(m){route="deal";html=P.deal(+m[1])}
+  else{if(!ROUTES.includes(h))route="home";html=P[route]()}
+  cur=route;
+  renderChrome(route);
+  $("#app").innerHTML=html;
+  $("#mnav").classList.remove("open");$("#burger").setAttribute("aria-expanded","false");
+  if(!keepScroll)window.scrollTo(0,0);
+  bind(route);
+}
+function bind(route){
+  clearInterval(heroTimer);
+  if(route==="home"&&HERO.length>1){
+    const show=i=>{heroIdx=(i+HERO.length)%HERO.length;document.querySelectorAll(".slide").forEach(s=>s.classList.toggle("on",+s.dataset.i===heroIdx));document.querySelectorAll("[data-go]").forEach(b=>b.setAttribute("aria-current",+b.dataset.go===heroIdx));$("#hcnt").textContent=`0${heroIdx+1} / 0${HERO.length}`};
+    show(heroIdx);
+    document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(+b.dataset.go));
+    const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const start=()=>{clearInterval(heroTimer);if(!heroPaused&&!reduce)heroTimer=setInterval(()=>show(heroIdx+1),6500)};
+    $("#hpp").textContent=heroPaused||reduce?"▶":"❚❚";
+    $("#hpp").onclick=()=>{heroPaused=!heroPaused;$("#hpp").textContent=heroPaused?"▶":"❚❚";start()};
+    start();
+  }
+  document.querySelectorAll("[data-part]").forEach(b=>b.onclick=()=>{partSel=b.dataset.part;const y=window.scrollY;render(true);window.scrollTo(0,y)});
+  document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{dealFilter=b.dataset.filter;const y=window.scrollY;render(true);window.scrollTo(0,y)});
+  document.querySelectorAll("[data-ask]").forEach(a=>a.onclick=()=>{askDeal=+a.dataset.ask});
+  if(route==="contact")bindForm();
+}
+function bindForm(){
+  const d=DEALS.find(a=>a.id===askDeal);
+  if(d){$("#f-subj").value=`[CASE ${String(d.id).padStart(2,"0")}] ${x(d.title)}`;askDeal=null}
+  $("#copyMail").onclick=e=>{const btn=e.currentTarget,txt=$("#mail").textContent;const sel=()=>{const r=document.createRange();r.selectNodeContents($("#mail"));const s=getSelection();s.removeAllRanges();s.addRange(r)};
+    try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent=x(F.copied)},sel)}catch(err){sel()}};
+  const file=$("#f-file");
+  file.onchange=()=>{const f=file.files[0];$("#fileName").textContent=f?f.name+" · "+(f.size/1048576).toFixed(1)+" MB":x(F.none);$("#e-file").textContent=""};
+  $("#inq").onsubmit=ev=>{ev.preventDefault();let ok=true;
+    const chk=(id,eid,cond,msg)=>{const el=$("#"+id),er=$("#"+eid);if(!cond){er.textContent=x(F[msg]);el.setAttribute("aria-invalid","true");ok=false}else{er.textContent="";el.removeAttribute("aria-invalid")}};
+    const v=id=>$("#"+id).value.trim();
+    chk("f-email","e-email",v("f-email")!=="","req");if(v("f-email"))chk("f-email","e-email",/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("f-email")),"mail");
+    chk("f-phone","e-phone",v("f-phone")!=="","req");chk("f-subj","e-subj",v("f-subj")!=="","req");chk("f-body","e-body",v("f-body")!=="","req");
+    const f=file.files[0];chk("f-file","e-file",!f||f.size<=10485760,"size");chk("f-agree","e-agree",$("#f-agree").checked,"agree");
+    const dn=$("#done");if(ok){dn.textContent=x(F.ok);dn.hidden=false}else{dn.hidden=true;const first=document.querySelector('[aria-invalid="true"]');if(first)first.focus()}};
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{L=b.dataset.l;try{localStorage.setItem("smcc-lang",L)}catch(e){};render(true)}));
+$("#burger").onclick=()=>{const o=$("#mnav").classList.toggle("open");$("#burger").setAttribute("aria-expanded",o)};
+document.addEventListener("click",e=>{const b=e.target.closest(".mi > button");document.querySelectorAll(".mi.open").forEach(m=>{if(!b||m!==b.parentElement)m.classList.remove("open")});if(b)b.parentElement.classList.toggle("open");if(e.target.closest(".drop a"))document.querySelectorAll(".mi.open").forEach(m=>m.classList.remove("open"))});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)clearInterval(heroTimer);else if(cur==="home")bind("home")});
+window.addEventListener("hashchange",()=>render(false));
+try{const s=localStorage.getItem("smcc-lang");if(s&&["ko","en","zh"].includes(s))L=s}catch(e){}
+render(true);
+</script>
+</body>
+</html>
