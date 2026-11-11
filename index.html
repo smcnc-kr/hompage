@@ -8,7 +8,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
 <style>
 /* Layout: advisory-firm site (menu → hero slider → proof → services → deals → reach → CTA), with sub-pages per division. Navy carries the brand; logo green marks "live" states. */
 :root{
@@ -29,6 +29,8 @@
   --band:#141D3D; --band-fg:#F2F5FB; --band-muted:#A3AFCF; --band-line:rgba(255,255,255,.12);
   --accent:#86A8E6; --accent-2:#6DBB92; --field:#0F1529; --btn:#86A8E6; --btn-fg:#0D1222; color-scheme:dark}
 html:lang(zh-CN) body{font-family:"Noto Sans SC","IBM Plex Sans KR",system-ui,sans-serif}
+html:lang(ja) body{font-family:"Noto Sans JP","IBM Plex Sans KR",system-ui,sans-serif}
+html:lang(ja) body,html:lang(zh-CN) body{word-break:normal;line-break:strict}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:80;background:var(--surface)}
@@ -45,7 +47,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 
 /* ===== header / menu ===== */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:70;background:var(--surface);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:20px;min-height:72px}
+.top .main-row{display:flex;align-items:center;gap:20px;min-height:72px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
 .brand svg{width:28px;height:32px}
 .brand b{font-size:18px;letter-spacing:-.01em;display:block;line-height:1.2}
@@ -59,20 +61,28 @@ nav.menu{display:flex;align-items:stretch;margin-left:auto;align-self:stretch}
 .mi:hover .drop,.mi:focus-within .drop,.mi.open .drop{display:grid}
 .drop a{text-decoration:none;font-size:14.5px;padding:9px 12px;border-radius:6px;white-space:nowrap}
 .drop a:hover,.drop a[aria-current="page"]{background:var(--bg-2);color:var(--accent)}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;flex-shrink:0}
-.lang button{font:500 12.5px var(--mono);border:0;background:none;color:var(--muted);padding:5px 10px;border-radius:999px;cursor:pointer}
-.lang button[aria-pressed="true"]{background:var(--btn);color:var(--btn-fg)}
+.util{background:var(--band);color:var(--band-muted)}
+.util .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px}
+.util-l{font:500 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.lang{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.lang button{font:500 12.5px var(--sans);border:0;background:none;color:var(--band-muted);padding:4px 10px;border-radius:4px;cursor:pointer;position:relative}
+.lang button + button::before{content:"";position:absolute;left:-1px;top:50%;height:10px;margin-top:-5px;width:1px;background:var(--band-line)}
+.lang button:hover{color:#fff}
+.lang button[aria-pressed="true"]{color:#fff;font-weight:700}
+.lang button[aria-pressed="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:2px;background:#9FC3AE;border-radius:1px}
 .cta-top{flex-shrink:0;text-decoration:none;font-weight:700;font-size:14.5px;background:var(--btn);color:var(--btn-fg);padding:9px 16px;border-radius:7px}
 .burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);cursor:pointer}
 .burger span,.burger span::before,.burger span::after{display:block;width:18px;height:1.6px;background:currentColor;margin:auto;position:relative}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0}
 .burger span::before{top:-6px}.burger span::after{top:6px}
-.mnav{display:none;border-top:1px solid var(--line);background:var(--surface);max-height:calc(100vh - 72px);overflow:auto}
+.mnav{display:none;border-top:1px solid var(--line);background:var(--surface);max-height:calc(100vh - 106px);overflow:auto}
 .mnav .wrap{display:grid;gap:18px;padding-block:18px 26px}
 .mnav b{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-bottom:4px}
 .mnav a{display:block;text-decoration:none;font-size:16px;padding:7px 0;font-weight:500}
-@media (max-width:1080px){nav.menu,.top .cta-top{display:none}.burger{display:block}.lang{margin-left:0}.mnav.open{display:block}}
-@media (max-width:420px){.brand small{display:none}.lang button{padding:5px 8px}}
+@media (max-width:1040px){.top .cta-top{display:none}}
+@media (max-width:900px){nav.menu{display:none}.burger{display:block}.mnav.open{display:block}}
+@media (max-width:1000px){.mi > a,.mi > button{padding:0 11px;font-size:15px}}
+@media (max-width:480px){.top .main-row{gap:10px}.brand b{font-size:16px}.burger{width:38px;height:38px}.util-l{display:none}.util .wrap{justify-content:flex-end}.lang button{padding:4px 8px;font-size:12px}}
 
 /* ===== shared blocks ===== */
 section.sec{padding-block:88px}
@@ -201,7 +211,7 @@ section.sec.tight{padding-block:64px}
 .crumb a{text-decoration:none}
 .phead h1{font-size:clamp(28px,4vw,44px);letter-spacing:-.02em}
 .phead p{color:var(--band-muted);max-width:44em;font-size:16.5px}
-.tabs{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 72px);z-index:20}
+.tabs{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 106px);z-index:20}
 .tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .tabs a{flex-shrink:0;text-decoration:none;font-weight:500;font-size:15px;padding:16px 16px 14px;border-bottom:2px solid transparent;color:var(--muted)}
 .tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent);font-weight:700}
@@ -216,7 +226,7 @@ section.sec.tight{padding-block:64px}
 .divs div.c2{border-color:var(--accent-2)}
 .divs b{font-size:17px}
 .divs span{font-size:14px;color:var(--muted)}
-.facts3{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border-top:1px solid var(--line)}
+.facts3{display:grid;grid-template-columns:repeat(2,1fr);margin-top:24px;border-top:1px solid var(--line)}
 .facts3 div{padding:14px 12px 0 0;display:grid}
 .facts3 dt{font-size:13px;color:var(--muted)}
 .facts3 dd{margin:0;font-weight:700;font-size:17px}
@@ -414,6 +424,25 @@ section.sec.tight{padding-block:64px}
 .vlogo img{max-height:100%;max-width:100%;object-fit:contain}
 @media (max-width:960px){.vcg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.vcg{grid-template-columns:1fr}.vcl{grid-template-columns:1fr 1fr}.vch{clip-path:none;border-radius:8px}}
+.lineup li a{display:grid;gap:4px;text-decoration:none;padding:2px 0}
+.lineup li a em{font-style:normal;font-size:13px;font-weight:700;color:var(--accent);margin-top:4px}
+.lineup li a:hover b{color:var(--accent)}
+.pd{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:start}
+.pd.noimg-pd{grid-template-columns:minmax(0,820px)}
+.pd-main{min-width:0}
+.pd-h{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em;margin:8px 0 10px}
+.pd-d{color:var(--muted);font-size:16.5px;margin-bottom:26px}
+.pd-sub{font-size:17px;margin-bottom:12px}
+.pd-imgs{display:grid;gap:10px}
+.pd-imgs.n2,.pd-imgs.n3,.pd-imgs.n4{grid-template-columns:1fr 1fr}
+.pd-imgs .ph{background:#fff;border:1px solid var(--line)}
+.pd-imgs .ph img{aspect-ratio:1;object-fit:contain;height:auto}
+.pd-imgs.n1 .ph img{aspect-ratio:auto;object-fit:contain;max-height:520px}
+.pd-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:56px;border-top:1px solid var(--line);padding-top:20px}
+.pd-nav a{text-decoration:none;display:grid;gap:2px}
+.pd-nav small{font-size:12.5px;color:var(--muted)}
+.pd-nav b{font-size:15.5px}
+@media (max-width:860px){.pd{grid-template-columns:1fr}.pd-side{order:-1}}
 /* deals list/detail */
 .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
 .dd-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
@@ -479,17 +508,18 @@ footer .wrap{padding-block:56px 28px;display:grid;gap:36px}
 </head>
 <body>
 <header class="top">
-  <div class="wrap">
+  <div class="util"><div class="wrap"><span class="util-l">Commerce | Consulting</span><div class="lang" id="lang" role="group" aria-label="Language">
+    <button type="button" id="l-ko" data-l="ko" aria-pressed="true">한국어</button>
+    <button type="button" id="l-en" data-l="en" aria-pressed="false">English</button>
+    <button type="button" id="l-zh" data-l="zh" aria-pressed="false">中文（简体）</button>
+    <button type="button" id="l-ja" data-l="ja" aria-pressed="false">日本語</button>
+  </div></div></div>
+  <div class="wrap main-row">
     <a class="brand" href="#home" aria-label="SMC&amp;C">
       <svg viewBox="0 0 30 34" aria-hidden="true"><rect x="0" y="12" width="13" height="22" rx="2.5" fill="#34599A"/><rect x="17" y="12" width="13" height="22" rx="2.5" fill="#34599A"/><rect x="8.5" y="0" width="13" height="16" rx="2.5" fill="#4E9470"/><circle cx="15" cy="13" r="1.6" fill="#fff"/></svg>
       <span><b data-u="brand">에스엠씨앤씨</b><small>SM Commerce &amp; Consulting</small></span>
     </a>
     <nav class="menu" id="menu" aria-label="main"></nav>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" id="l-ko" data-l="ko" aria-pressed="true">KO</button>
-      <button type="button" id="l-en" data-l="en" aria-pressed="false">EN</button>
-      <button type="button" id="l-zh" data-l="zh" aria-pressed="false">中文</button>
-    </div>
     <a class="cta-top" href="#contact" data-u="contact">상담 요청</a>
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span></button>
   </div>
@@ -504,13 +534,14 @@ footer .wrap{padding-block:56px 28px;display:grid;gap:36px}
 <script>
 /* ---------- i18n ---------- */
 let L="ko";
-const x=o=>o==null?"":(typeof o==="string"?o:(o[L]??o.ko));
+const x=o=>o==null?"":(typeof o==="string"?o:(L==="ja"?(JA[o.ko]??o.en):(o[L]??o.ko)));
+const JA={"에스엠씨앤씨": "SMC&C", "시안 · DRAFT": "試案 · DRAFT", "홈": "ホーム", "회사소개": "会社紹介", "회사 개요": "会社概要", "연혁": "沿革", "조직 구성": "組織構成", "글로벌 네트워크": "グローバルネットワーク", "커머스 사업부": "コマース事業部", "제조설비": "製造設備", "장비": "装置", "부품 · 소재": "部品 · 素材", "컨설팅 사업부": "コンサルティング事業部", "컨설팅 사업 구조": "コンサルティング事業構造", "주요 협력사": "主要協力会社", "비즈니스 성과": "ビジネス成果", "M&A 기회보기": "M&A案件情報", "상담 요청": "ご相談・お問い合わせ", "전체 보기 →": "すべて見る →", "자세히 보기 →": "詳しく見る →", "국경을 넘어 기업을 잇는 가교,\n<em>M&A · 투자유치 전문기업</em>": "国境を越えて企業をつなぐ架け橋\n<em>M&A · 投資誘致の専門企業</em>", "기술을 가진 기업과 성장 자본을 가진 기업을 찾아 연결하고, 거래가 성사될 때까지 함께합니다.": "技術を持つ企業と成長資本を持つ企業を見つけてつなぎ、取引が成立するまで伴走します。", "억원": "億ウォン", "국제 합작계약 체결": "国際合弁契約締結", "대": "台", "반도체 설비 수출 계약": "半導体設備輸出契約", "곳": "か所", "5개국 글로벌 거점": "5か国のグローバル拠点", "건": "件", "국내외 상장사 자문사 선정": "国内外上場企業のアドバイザー選定", "반도체 장비·소재·부품 무역, 중고 장비와 공정 설비의 매각·이전, 해외 수출입을 수행합니다.": "半導体装置・素材・部品の貿易、中古装置や工程設備の売却・移設、海外輸出入を行っています。", "기업 인수·합병(M&A) 자문과 해외 투자 자문으로 국경을 넘는 투자와 합작을 연결합니다.": "企業M&Aアドバイザリーと海外投資アドバイザリーで、国境を越えた投資と合弁をつなぎます。", "NY Enterprise 설립": "NY Enterprise 設立", "대만 T社 · 일본 S社 진입": "台湾T社 · 日本S社へ参入", "중국 상장사\nJ Group 자문사 선정": "中国上場企業\nJ Group アドバイザー選定", "한국 상장사 M社\n자문사 선정": "韓国上場企業M社\nアドバイザー選定", "일본 상장사 T社\n자문사 선정": "日本上場企業T社\nアドバイザー選定", "에스엠씨앤씨 주식회사로\n사명 변경": "エスエムシーアンドシー株式会社へ\n社名変更", "매출 100억원 돌파": "売上100億ウォン突破", "자회사 Semiquity Private\nInvestment Association 설립": "子会社 Semiquity Private\nInvestment Association 設立", "SM CNC\n벤처기업 인증 획득": "SM CNC\nベンチャー企業認証取得", "천만불 수출의 탑\n수상 (확정)": "1,000万ドル輸出の塔\n受賞（確定）", "반도체 장비·소재·부품 무역": "半導体装置・素材・部品の貿易", "중고장비·설비 매각 및 이전": "中古装置・設備の売却および移設", "M&A 컨설팅": "M&Aコンサルティング", "해외투자 컨설팅": "海外投資コンサルティング", "소재개발 연구소": "素材開発研究所", "Photo Resist 소재 개발": "Photo Resist 素材開発", "반도체용 기판 소재 개발": "半導体用基板素材開発", "경영기획실": "経営企画室", "재무 · 회계": "財務 · 会計", "인사 · 총무": "人事 · 総務", "지분투자": "出資", "반도체 기업 지분투자 구조 자문": "半導体企業の出資スキーム・アドバイザリー", "국내 반도체 기업 × 중국 상장사": "韓国半導体企業 × 中国上場企業", "반도체": "半導体", "해외 상장사 (SI)": "海外上場企業（SI）", "800~1,000억원": "800〜1,000億ウォン", "합작사 설립 진행 중": "合弁会社設立進行中", "국내 반도체 기업에 해외 상장사가 지분을 투자하고, 이후 현지 합작법인 설립까지 이어지는 거래입니다.": "韓国の半導体企業に海外上場企業が出資し、その後現地合弁法人の設立へとつながる案件です。", "홍콩 SPC를 통한 신주 인수 구조 설계": "香港SPCを通じた新株引受スキームの設計", "투자 후 지분·이사회 구성안 마련": "出資後の持分・取締役会構成案の策定", "실적 약정·기업가치 조정 조건 협의": "業績条項・企業価値調整条件の協議", "중국 현지 합작법인 설립 구상": "中国現地合弁法人の設立構想", "시장 공동진출": "市場共同進出", "전자소재 기업 해외 시장 공동진출 자문": "電子材料企業の海外市場共同進出アドバイザリー", "국내 전자소재 화학기업 × 중국 산업그룹": "韓国電子材料化学企業 × 中国産業グループ", "전자소재 · 화학": "電子材料 · 化学", "해외 산업그룹 (SI)": "海外産業グループ（SI）", "200~300억원": "200〜300億ウォン", "제안 · 협의 진행 중": "提案 · 協議中", "해외 산업그룹의 투자를 유치하고, 그룹 계열사를 초기 판로로 연결해 현지 시장에 함께 진출하는 거래입니다.": "海外産業グループの投資を誘致し、グループ会社を初期の販路としてつなぎ、現地市場へ共同で進出する案件です。", "중국 산업그룹의 투자 유치 구조 제안": "中国産業グループの投資誘致スキームの提案", "투자 후 중국 현지 자회사 설립 구상": "出資後の中国現地子会社設立構想", "그룹 계열사를 초기 판로로 연계": "グループ会社を初期販路として連携", "NDA → MOU → 투자계약 추진": "NDA → MOU → 投資契約の推進", "합작법인": "合弁法人", "포토레지스트 현지화 자문": "フォトレジスト現地化アドバイザリー", "국내 포토레지스트 기업 × 중국 투자사": "韓国フォトレジスト企業 × 中国投資会社", "반도체 소재 (포토레지스트)": "半導体素材（フォトレジスト）", "해외 투자사 (FI)": "海外投資会社（FI）", "500~600억원": "500〜600億ウォン", "제안 · 검토 진행 중": "提案 · 検討中", "반도체 회로를 새기는 감광액(포토레지스트) 기술을 가진 국내 기업과 해외 투자사가 현지 합작법인을 세우는 거래입니다.": "半導体回路を刻む感光材（フォトレジスト）の技術を持つ韓国企業と海外投資会社が、現地合弁法人を設立する案件です。", "중국 현지 합작법인 설립 구조 제안": "中国現地合弁法人の設立スキーム提案", "기술 이전형 · 현지 개발형 협력안 설계": "技術移転型 · 現地開発型の協力案設計", "한국 기술 파트너 발굴 · 검증": "韓国技術パートナーの発掘 · 検証", "현지 평가 Lab · 고객 인증 연계 구상": "現地評価ラボ · 顧客認証連携の構想", "제안": "提案", "협의": "協議", "MOU": "MOU", "계약": "契約", "설립 · 실행": "設立 · 実行", "반도체 회로 모양을 빛으로 새길 때 쓰는 감광액(PR)과, 빛 반사를 막는 바닥막(BARC)입니다.": "半導体回路のパターンを光で刻む際に使う感光材（PR）と、光の反射を防ぐ下層膜（BARC）です。", "국내 대형 메모리 고객에 i-Line · KrF PR 10년 이상 양산 공급": "国内大手メモリー顧客へ i-Line · KrF PR を10年以上量産供給", "2019년 일본 수출 규제 이후 수입 PR 대체 공급 실적": "2019年の日本の輸出規制以降、輸入PRの代替供給実績", "i-line 노광 표준 조건에서 평가 완료, 공정 변경 없이 도입 가능": "i-line露光の標準条件で評価済み、工程変更なしで導入可能", "제품군": "製品群", "구성": "構成", "막두께 · 해상도": "膜厚 · 解像度", "적용 공정": "適用工程", "7종": "7種", "식각 · 이온주입 · Al 배선 · RDL": "エッチング · イオン注入 · Al配線 · RDL", "5종": "5種", "Lift-off · MEMS · 패키징": "Lift-off · MEMS · パッケージング", "ArF 액침 · Gap-fill · KrF": "ArF液浸 · Gap-fill · KrF", "개발/양산": "開発/量産", "KrF 양산, ArF 양산 준비": "KrF量産、ArF量産準備中", "반도체 웨이퍼를 깎아내는 식각 장비 안쪽에 들어가는 핵심 부품입니다. 상부 전극, 각종 링, 쿼츠, 실리콘, 소켓, EMI 부품을 공급합니다.": "ウェーハを削るエッチング装置の内部に使われる重要部品です。上部電極、各種リング、石英、シリコン、ソケット、EMI部品を供給します。", "Shape / Outer Upper Electrode (상부 전극)": "Shape / Outer Upper Electrode（上部電極）", "C-Ring · Edge Ring · O-pad": "C-Ring · Edge Ring · O-pad", "Quartz · Silicone · Socket · EMI 부품": "Quartz · Silicone · Socket · EMI部品", "식각 장비에서 소모되는 실리콘(Si)·탄화규소(SiC) 부품입니다.": "エッチング装置で消耗するシリコン（Si）・炭化ケイ素（SiC）部品です。", "식각 챔버용 Showerhead (Lapping · Polishing), CEL Body, Gas Shower": "エッチングチャンバー用 Showerhead（Lapping · Polishing）、CEL Body、Gas Shower", "Focus Ring · Poly Outer Ring · C-Ring · Shape Upper Electrode": "Focus Ring · Poly Outer Ring · C-Ring · Shape Upper Electrode", "PCD · EDM 드릴링, 3D Etching, 손상층(Damage Layer) 관리 기술 내재화": "PCD · EDMドリリング、3D Etching、ダメージ層管理技術を内製化", "순정품(OEM) 대비 교체 주기 30~35% 개선, 원가 최대 50% 절감 사례": "純正品（OEM）比で交換周期30〜35%改善、原価最大50%削減の事例", "고온과 화학물질을 견디는 석영(쿼츠)으로 만든 장비 부품입니다.": "高温や化学物質に耐える石英（クォーツ）で作られた装置部品です。", "식각용 Focus Ring · Shield Ring · Cover Ring · Insulator · Quartz Window": "エッチング用 Focus Ring · Shield Ring · Cover Ring · Insulator · Quartz Window", "확산 · 산화 공정용 Quartz Boat · Quartz Tube · Quartz Bath": "拡散 · 酸化工程用 Quartz Boat · Quartz Tube · Quartz Bath", "제조 협력사: CNC 23기 · MCT 9기, 연마 · 열처리 · 화염 연마 일괄 공정": "製造協力会社：CNC 23台 · MCT 9台、研磨 · 熱処理 · 火炎研磨の一貫工程", "국내 대형 반도체 제조사 2차 협력사, ISO 9001 인증": "国内大手半導体メーカーの二次協力会社、ISO 9001認証", "장비 부품 사이의 열을 전달하고, 틈을 막고, 전기 신호 간섭을 막아주는 부품입니다.": "装置部品間の熱を伝え、隙間をふさぎ、電気信号の干渉を防ぐ部品です。", "식각 챔버용 TIM Gasket · GEL Pad · Q-Pad, 열전도 0.25~11.5W 등급": "エッチングチャンバー用 TIM Gasket · GEL Pad · Q-Pad、熱伝導0.25〜11.5Wグレード", "상부 전극 체결용 Stud Socket · Seal Socket, 자동 조립 설비로 조립 불량 방지": "上部電極締結用 Stud Socket · Seal Socket、自動組立設備で組立不良を防止", "RF 접지용 EMI Gasket (BeCu · SUS · Hastelloy · Elgiloy), Weldment, Lift Pin": "RF接地用EMI Gasket（BeCu · SUS · Hastelloy · Elgiloy）、Weldment、Lift Pin", "글로벌 주요 식각 장비에 적용, 국내 대형 반도체 제조사 Gasket 2차 벤더": "世界の主要エッチング装置に適用、国内大手半導体メーカーのGasket二次ベンダー", "웨이퍼를 데우는 히터와, 정전기로 웨이퍼를 붙잡아 두는 척(ESC)입니다.": "ウェーハを加熱するヒーターと、静電気でウェーハを保持するチャック（ESC）です。", "Single-Zone · Dual-Zone CVD Heater": "Single-Zone · Dual-Zone CVD Heater", "Chucking · He · Cathode 기능 개발(CIP) 및 수리": "Chucking · He · Cathode 機能開発（CIP）および修理", "ESC: 고순도 Al2O3 Plate · Coating, 2/4-Zone": "ESC：高純度Al2O3 Plate · Coating、2/4-Zone", "Uni/Bi-Polar 전극, Ceramic Plate 표면 재생": "Uni/Bi-Polar電極、Ceramic Plateの表面再生", "공정 가스의 양을 정밀하게 조절하고, 진공 압력을 재는 제어 부품입니다.": "工程ガスの量を精密に制御し、真空圧力を測定する制御部品です。", "MFC(가스 유량 제어기): 정확도 ±1.0% S.P., 응답 0.8초 이하, 연간 Drift 0.1% F.S. 미만": "MFC（ガス流量制御器）：精度±1.0% S.P.、応答0.8秒以下、年間Drift 0.1% F.S.未満", "정전용량식 진공 게이지: 정확도 0.25%, 측정 범위 10~1000 Torr": "静電容量式真空計：精度0.25%、測定範囲10〜1000 Torr", "Vaporizer (ZrO · HfO), APC Valve (Butterfly · Pendulum), Toxic Gas Heater Block": "Vaporizer（ZrO · HfO）、APC Valve（Butterfly · Pendulum）、Toxic Gas Heater Block", "제조 협력사: 중국 내 800여 고객 보유": "製造協力会社：中国国内に約800社の顧客", "웨이퍼 위에 아주 얇은 막을 입히는 증착 장비입니다.": "ウェーハ上に非常に薄い膜を形成する成膜装置です。", "ALD 원자층 증착 시스템: 나노 단위 두께 제어, 우수한 단차 피복": "ALD原子層堆積システム：ナノ単位の膜厚制御、優れた段差被覆性", "반도체용 스퍼터링: 포토마스크 크롬막, 웨이퍼 EMI 차폐막 (Cu+SUS) 양산": "半導体用スパッタリング：フォトマスクのクロム膜、ウェーハEMIシールド膜（Cu+SUS）の量産", "TGV 심공 · 관통공 스퍼터링: 홀 φ20µm, 종횡비 1:20, 첨단 패키징 대응": "TGV深穴 · 貫通穴スパッタリング：穴径φ20µm、アスペクト比1:20、先端パッケージング対応", "웨이퍼 표면을 평평하게 갈아내는 공정(CMP)에 쓰는 연마액입니다.": "ウェーハ表面を平坦に研磨する工程（CMP）に使う研磨液です。", "Zirconia · Wet Ceria · UHPCS 연마재 자체 생산": "Zirconia · Wet Ceria · UHPCS 研磨材を自社生産", "Hard Mask ACL CMP: 탄소 돌기 결함 제거율 ~100%, 양산 공급 중": "Hard Mask ACL CMP：炭素突起欠陥除去率〜100%、量産供給中", "Class 10 클린룸 R&D 센터 (362㎡), 300mm CMP 평가 설비 보유": "Class 10クリーンルームR&Dセンター（362㎡）、300mm CMP評価設備を保有", "KrF PR용 PHS Polymer 사업 병행": "KrF PR用PHS Polymer事業も展開", "제품": "製品", "연마재": "研磨材", "적용": "用途", "단계": "段階", "NAND · 탄소 돌기 결함 제거": "NAND · 炭素突起欠陥除去", "양산": "量産", "NAND · 고선택비 · 고연마율": "NAND · 高選択比 · 高研磨レート", "평가": "評価", "DRAM · NAND · Dishing 최소화": "DRAM · NAND · Dishing最小化", "개발 완료": "開発完了", "PKG · 고단차 제거 · Self Stop": "PKG · 高段差除去 · Self Stop", "DRAM · Isolation · 고선택비": "DRAM · Isolation · 高選択比", "웨이퍼 제조 · 저금속 불순물": "ウェーハ製造 · 低金属不純物", "업종": "業種", "투자자": "投資家", "거래 규모": "取引規模", "진행 단계": "進行段階", "업데이트": "更新", "대상 소재지": "対象所在地", "한국": "韓国", "거래 개요": "案件概要", "주요 자문 내용": "主なアドバイザリー内容", "진행 현황": "進捗状況", "이 건 문의하기": "この案件について問い合わせる", "← 목록으로": "← 一覧へ戻る", "고객사 보호를 위해 회사명은 공개하지 않습니다. 상세 자료는 비밀유지계약(NDA) 체결 후 제공합니다.": "お客様保護のため社名は公開しておりません。詳細資料は秘密保持契約（NDA）締結後にご提供します。", "전체": "すべて", "두 개의 사업부, 하나의 네트워크": "2つの事業部、1つのネットワーク", "거래를 연결하는 컨설팅과, 거래를 실행하는 커머스가 함께 움직입니다.": "取引をつなぐコンサルティングと、取引を実行するコマースが一体となって動きます。", "현재 진행 중인 투자·합작 기회입니다.": "現在進行中の投資・合弁案件です。", "국제 합작법인 설립 자문": "国際合弁法人設立アドバイザリー", "규모의 합작계약(JVA) 체결 완료 · 성공보수 확정": "規模の合弁契約（JVA）締結完了 · 成功報酬確定", "반도체 생산 설비 수출 계약": "半導体生産設備輸出契約", "설비 매입부터 해외 현지 재설치까지 일괄 수행": "設備の買取から海外現地での再設置まで一括対応", "5개국 8개 거점": "5か国8拠点", "한국 본사와 자회사, 제조 기지, 그리고 해외 협업망이 하나의 네트워크로 움직입니다.": "韓国本社と子会社、製造拠点、そして海外の協力ネットワークが一つのネットワークとして動きます。", "중국": "中国", "대만": "台湾", "일본": "日本", "싱가포르": "シンガポール", "M&A · 투자유치를 검토 중이신가요?": "M&A · 投資誘致をご検討中ですか？", "문의 내용은 비밀로 다룹니다.": "お問い合わせ内容は秘密として取り扱います。", "본사 · 경기도 화성시 동탄": "本社 · 京畿道華城市東灘", "글로벌 네트워크로 기업의 다음 성장을 연결합니다": "グローバルネットワークで企業の次の成長をつなぎます", "에스엠씨앤씨는 산업 현장에 필요한 장비와 부품을 공급하는 커머스 사업과, 기업의 인수·합병과 해외 투자를 돕는 컨설팅 사업을 함께 운영합니다.": "エスエムシーアンドシーは、産業現場に必要な装置と部品を供給するコマース事業と、企業のM&Aと海外投資を支援するコンサルティング事業を運営しています。", "산업 장비·부품 공급, 설비 이전, 해외 무역": "産業装置・部品の供給、設備移設、海外貿易", "기업 인수·합병(M&A) 자문, 기업 간 해외 투자 연결": "企業M&Aアドバイザリー、企業間の海外投資をつなぐ", "설립": "設立", "소재지": "所在地", "경기도 화성시 동탄": "京畿道華城市東灘", "2022년 설립 이후의 주요 발자취입니다.": "2022年の設立以来の主な歩みです。", "대표이사": "代表取締役", "본사(화성)": "本社（華城）", "구미": "亀尾", "우한": "武漢", "심천 · 홍콩": "深圳 · 香港", "타이베이": "台北", "도쿄": "東京", "한국 경기도 화성시 동탄": "韓国 京畿道華城市東灘", "중국 우한": "中国 武漢", "중국 심천": "中国 深圳", "중국 홍콩": "中国 香港", "대만 타이베이": "台湾 台北", "일본 도쿄": "日本 東京", "한국 본사를 중심으로 5개국 8개 거점이 하나의 네트워크로 움직입니다.": "韓国本社を中心に、5か国8拠点が一つのネットワークとして動きます。", "5개국 · 8개 거점": "5か国 · 8拠点", "한국 · 중국 · 대만 · 일본 · 싱가포르": "韓国 · 中国 · 台湾 · 日本 · シンガポール", "본사": "本社", "자회사": "子会社", "외주 제조기지": "外部委託製造拠点", "한국 경상북도 구미시": "韓国 慶尚北道亀尾市", "협업망": "協力ネットワーク", "공정 설비를 매입·이전 또는 수출하고, 해외 현지에 다시 설치합니다.": "工程設備を買い取り・移設または輸出し、海外現地で再設置します。", "설비 매입부터 현지 재설치까지": "設備の買取から現地再設置まで", "국내 공장의 공정 설비를 골라 매입하고, 검증·해체·포장·물류를 거쳐 해외 고객 공장에서 다시 가동하기까지 직접 관리합니다.": "国内工場の工程設備を選定して買い取り、検証・解体・梱包・物流を経て海外の顧客工場で再稼働するまで直接管理します。", "신규 · 메인 공정 설비 매입": "新規 · メイン工程設備の買取", "검증 · 해체": "検証 · 解体", "포장 · 물류 · 수출 등 무역 업무": "梱包 · 物流 · 輸出などの貿易業務", "현지 설치 등 기술 지원": "現地設置などの技術サポート", "이전 대상 반도체 설비": "移設対象の半導体設備", "설비 이전 5단계": "設備移設の5ステップ", "설비 발굴 · 매입": "設備の発掘 · 買取", "국내 공정 설비 선별 · 매입 계약": "国内工程設備の選定 · 買取契約", "설비 검증": "設備検証", "설비 상태 · 사양 · 가동 이력 확인": "設備の状態 · 仕様 · 稼働履歴の確認", "해체 · 포장": "解体 · 梱包", "해체 · 포장 (도급)": "解体 · 梱包（請負）", "포장 · 수출 · 운송": "梱包 · 輸出 · 輸送", "해외 수출을 위한 절차 진행": "海外輸出のための手続き", "현지 재설치": "現地再設置", "해외 고객 공장 설치 · 시운전": "海外顧客工場での設置 · 試運転", "클린룸 생산 라인": "クリーンルーム生産ライン", "이전 대상 계측 설비": "移設対象の計測設備", "해체 · 포장 후 출하 대기": "解体 · 梱包後の出荷待ち", "커머스 사업부 비즈니스 성과": "コマース事業部 ビジネス成果", "2026 계약 체결": "2026年 契約締結", "반도체 생산 설비 해외 수출 계약": "半導体生産設備の海外輸出契約", "계약 범위": "契約範囲", "설비 매입부터 중국 현지 재설치까지 일괄 수행": "設備の買取から中国現地での再設置まで一括対応", "설비 구성": "設備構成", "국내 중견기업 보유 설비 25대 + 신규 설비 88대": "国内中堅企業保有設備25台 + 新規設備88台", "수행 절차": "実施手順", "매입 → 검증 · 해체 · 물류 → 현지 재설치 → 인수검사": "買取 → 検証 · 解体 · 物流 → 現地再設置 → 受入検査", "실행 방식": "実行方式", "3개 Lot 순차 실행 · 3개사 협업": "3つのLotを順次実行 · 3社協業", "2026년 신규 설비 88대 수출 (11월 예정), 나머지 메인 공정 설비는 2027~28년 2차로 수출": "2026年に新規設備88台を輸出（11月予定）、残りのメイン工程設備は2027〜28年に2次輸出", "반도체 신장비를 해외 제조사에서 구매해 국내에 판매하거나 수출합니다.": "半導体の新装置を海外メーカーから購入し、国内で販売または輸出します。", "해외 제조사 신장비 공급": "海外メーカーの新装置供給", "분석 장비, 환경시험 챔버, 전자현미경 등 반도체 연구·생산에 필요한 신장비를 제조사에서 직접 구매해 검수 후 납품합니다.": "分析装置、環境試験チャンバー、電子顕微鏡など、半導体の研究・生産に必要な新装置をメーカーから直接購入し、検収後に納品します。", "해외 제조사 신장비 직접 구매": "海外メーカーから新装置を直接購入", "입고 · 검수 및 품질 확인": "入庫 · 検収および品質確認", "국내 고객사 판매 · 납품": "国内顧客への販売 · 納品", "수출 포장 · 해외 선적": "輸出梱包 · 海外船積み", "ESPEC 환경시험 챔버": "ESPEC 環境試験チャンバー", "Tescan 전자현미경": "Tescan 電子顕微鏡", "장비 공급 5단계": "装置供給の5ステップ", "신장비 발주 · 구매": "新装置の発注 · 購入", "해외 제조사 직접 구매": "海外メーカーから直接購入", "입고 · 검수": "入庫 · 検収", "창고 입고 · 품질 확인": "倉庫入庫 · 品質確認", "국내 판매 · 납품": "国内販売 · 納品", "국내 고객사 공급 · 납품": "国内顧客への供給 · 納品", "수출 포장": "輸出梱包", "목재 크레이트 포장": "木製クレート梱包", "해외 선적 · 운송": "海外船積み · 輸送", "컨테이너 선적 · 납품": "コンテナ船積み · 納品", "공급 장비와 출하 현장": "供給装置と出荷現場", "Metrohm 분석 장비": "Metrohm 分析装置", "입고 검수 팔레트": "入庫検収パレット", "선적 대기 화물": "船積み待ち貨物", "수출 목재 포장": "輸出用木製梱包", "수출 크레이트": "輸出クレート", "반도체 정밀부품 · 소재와 전자부품을 한국 제조사에서 찾아 해외 제조사에 공급합니다.": "半導体精密部品・素材と電子部品を韓国メーカーから調達し、海外メーカーへ供給します。", "반도체 공정 전반의 부품 · 소재": "半導体工程全般の部品 · 素材", "반도체 공정에 들어가는 소모품과 핵심 부품을 검증된 제조 파트너와 함께 공급합니다.": "半導体工程で使われる消耗品と重要部品を、検証済みの製造パートナーとともに供給します。", "한국 제조사 소싱 · 품질 확인": "韓国メーカーの調達 · 品質確認", "통신 · 전원 · 로봇 · 가전 고객 대상": "通信 · 電源 · ロボット · 家電の顧客向け", "수출 통관 · 물류 관리": "輸出通関 · 物流管理", "결제 · 납기 일원화": "決済 · 納期の一元化", "제품 라인업": "製品ラインアップ", "← 제품 라인업으로": "← 製品ラインアップへ", "주요 특징": "主な特長", "이전 제품": "前の製品", "다음 제품": "次の製品", "투자자를 찾는 일부터 계약 체결과 현지 법인 설립까지, 거래의 처음과 끝을 함께합니다.": "投資家探しから契約締結、現地法人設立まで、取引の始まりから終わりまで伴走します。", "국경을 넘는 거래를 처음부터 끝까지": "国境を越える取引を最初から最後まで", "언어와 제도, 기업 문화가 다른 나라의 기업 사이에서 상대를 찾고, 조건을 맞추고, 계약을 마무리합니다.": "言語や制度、企業文化の異なる国の企業の間で相手を見つけ、条件を調整し、契約をまとめます。", "M&A 자문": "M&Aアドバイザリー", "기업을 사고팔거나 지분을 인수하려는 기업에 맞는 상대를 찾고, 거래 구조와 조건 협상을 돕습니다.": "企業の売買や出資を検討する企業に最適な相手を見つけ、取引スキームと条件交渉を支援します。", "투자유치": "投資誘致", "성장 자금이 필요한 기업과 해외 상장사, 산업그룹, 투자사를 연결합니다.": "成長資金を必要とする企業と、海外の上場企業・産業グループ・投資会社をつなぎます。", "합작법인 · 해외 진출": "合弁法人 · 海外進出", "서로 다른 나라의 기업이 함께 세우는 합작법인과 현지 법인 설립, 해외 시장 공동 진출을 지원합니다.": "異なる国の企業がともに設立する合弁法人や現地法人の設立、海外市場への共同進出を支援します。", "파트너 발굴 · 검증": "パートナーの発掘 · 検証", "중국 상장사 · 산업그룹 등 투자자를 찾고 검증합니다.": "中国の上場企業・産業グループなどの投資家を探し、検証します。", "거래 구조 설계": "取引スキーム設計", "지분투자 · 합작법인 등 양측에 맞는 구조를 설계합니다.": "出資・合弁法人など、双方に合ったスキームを設計します。", "조건 협상 지원": "条件交渉の支援", "기업가치 · 지분율 · 지배구조 협상을 지원합니다.": "企業価値・持分比率・ガバナンスの交渉を支援します。", "계약 · 실행 지원": "契約 · 実行の支援", "MOU · 투자계약 체결과 현지 법인 설립을 돕습니다.": "MOU・投資契約の締結と現地法人の設立を支援します。", "소재": "素材", "연성 동박적층판": "フレキシブル銅張積層板", "필름 기판": "フィルム基板", "구동칩": "駆動IC", "반도체용 기판(Substrate) 밸류체인 안의 기업과 투자자를 연결합니다.": "半導体用基板（Substrate）バリューチェーンの企業と投資家をつなぎます。", "소재부터 구동칩까지, 밸류체인 전체와 연결합니다": "素材から駆動ICまで、バリューチェーン全体とつながります", "각 단계의 주요 기업과 투자자 · 수요처를 연결하며, M&A 자문 · 지분투자 구조 자문 · 합작법인 설립 · 해외 시장 공동진출을 지원합니다.": "各段階の主要企業と投資家・需要先をつなぎ、M&Aアドバイザリー・出資スキームアドバイザリー・合弁法人設立・海外市場への共同進出を支援します。", "국경을 넘는 거래를 성사시킨 주요 실적입니다.": "国境を越える取引を成立させた主な実績です。", "컨설팅 사업부 비즈니스 성과": "コンサルティング事業部 ビジネス成果", "규모의 합작계약 체결 완료 · 성공보수 확정": "規模の合弁契約締結完了 · 成功報酬確定", "당사자": "当事者", "S사(한국) × J사(중국)": "S社（韓国）× J社（中国）", "거래 내용": "取引内容", "합작법인(JV) 설립 및 합작계약(JVA) 체결": "合弁法人（JV）設立および合弁契約（JVA）締結", "자문 범위": "アドバイザリー範囲", "파트너 검증 · JV 구조 설계 · 조건 협상 · 계약 검토": "パートナー検証 · JVスキーム設計 · 条件交渉 · 契約レビュー", "계약 형태": "契約形態", "성공보수형 (Success Fee) · 성공보수 확정": "成功報酬型（Success Fee）· 成功報酬確定", "현재 진행 중인 투자 · 합작 기회입니다. 관심 있는 건은 상담을 요청해 주세요.": "現在進行中の投資・合弁案件です。ご関心のある案件はお気軽にご相談ください。", "M&A, 투자유치, 합작 진출, 장비 · 부품 공급에 관한 문의를 남겨 주세요. 문의 내용은 비밀로 다룹니다.": "M&A、投資誘致、合弁進出、装置・部品供給に関するお問い合わせをお寄せください。お問い合わせ内容は秘密として取り扱います。", "이메일": "メール", "복사": "コピー", "주소": "住所", "경기도 화성시 동탄구 동탄영천로 150, A동 1302–1305호": "京畿道華城市東灘区東灘永川路150、A棟1302〜1305号", "연락처": "電話番号", "제목": "件名", "내용": "内容", "첨부파일": "添付ファイル", "파일 선택": "ファイルを選択", "선택된 파일 없음 · 최대 10MB": "ファイル未選択 · 最大10MB", "문의 회신을 위해 이메일과 연락처를 수집 · 이용하는 데 동의합니다.": "お問い合わせへの回答のため、メールアドレスと電話番号の収集・利用に同意します。", "문의 보내기": "送信する", "필수 입력 항목입니다.": "必須項目です。", "이메일 형식을 확인해 주세요.": "メールアドレスの形式をご確認ください。", "10MB 이하 파일만 첨부할 수 있습니다.": "添付できるのは10MB以下のファイルのみです。", "동의가 필요합니다.": "同意が必要です。", "입력 내용이 확인되었습니다. 온라인 문의 발송 기능은 준비 중입니다. 같은 내용을 inquiry@sm-cnc.kr 로 보내 주세요.": "入力内容を確認しました。オンライン送信機能は準備中です。同じ内容を inquiry@sm-cnc.kr までお送りください。", "복사됨": "コピーしました", "에스엠씨앤씨 주식회사": "エスエムシーアンドシー株式会社"};
 const T=(ko,en,zh)=>({ko,en,zh});
 const U={
 brand:T("에스엠씨앤씨","SMC&C","SMC&C"),draft:T("시안 · DRAFT","DRAFT","样稿 · DRAFT"),
 home:T("홈","Home","首页"),about:T("회사소개","About","公司介绍"),overview:T("회사 개요","Overview","公司概况"),history:T("연혁","History","发展历程"),organization:T("조직 구성","Organization","组织架构"),network:T("글로벌 네트워크","Global network","全球网络"),
 commerce:T("커머스 사업부","Commerce","贸易事业部"),plant:T("제조설비","Production lines","生产设备"),equipment:T("장비","Equipment","设备"),parts:T("부품 · 소재","Parts & materials","零部件 · 材料"),
-consulting:T("컨설팅 사업부","Consulting","咨询事业部"),advisory:T("컨설팅 사업 구조","Advisory services","咨询业务结构"),valuechain:T("기판 밸류체인","Substrate value chain","基板价值链"),track:T("핵심 성과","Track record","核心业绩"),
+consulting:T("컨설팅 사업부","Consulting","咨询事业部"),advisory:T("컨설팅 사업 구조","Advisory services","咨询业务结构"),valuechain:T("주요 협력사","Key partners","主要合作伙伴"),track:T("비즈니스 성과","Business results","业务成果"),
 deals:T("M&A 기회보기","M&A opportunities","并购机会"),contact:T("상담 요청","Contact us","咨询洽谈"),
 viewAll:T("전체 보기 →","View all →","查看全部 →"),more:T("자세히 보기 →","Learn more →","了解更多 →"),
 };
@@ -532,7 +563,7 @@ const STATS=[
  {n:"500",u:T("억원","B KRW ×0.1","亿韩元"),un:T("억원","× 100M KRW","亿韩元"),l:T("국제 합작계약 체결","Cross-border JV signed","跨国合资协议签署")},
  {n:"113",un:T("대","units","台"),l:T("반도체 설비 수출 계약","Fab tools under export contract","半导体设备出口合同")},
  {n:"8",un:T("곳","sites","处"),l:T("5개국 글로벌 거점","Global sites in 5 countries","5国全球据点")},
- {n:"100",un:T("억원+","× 100M KRW+","亿韩元+"),l:T("2026.07 매출 돌파","Revenue passed (Jul 2026)","2026.07 销售额突破")},
+ {n:"3",un:T("건","","项"),l:T("국내외 상장사 자문사 선정","Advisory mandates from listed companies","国内外上市公司顾问委任")},
 ];
 const DIV={
  commerce:{img:"img/fab1.jpg",eb:"Commerce",h:U.commerce,
@@ -550,7 +581,7 @@ const HIST=[
  {d:"2026.07",c:"mkt",pos:"up",t:T("매출 100억원 돌파","Revenue passed KRW 10 billion","销售额突破100亿韩元"),img:"img/h/growth.svg",k:"icon"},
  {d:"2026.09",c:"corp",pos:"dn",t:T("자회사 Semiquity Private\nInvestment Association 설립","Subsidiary Semiquity Private\nInvestment Association established","设立子公司Semiquity Private\nInvestment Association"),img:"img/h/semiquity.png",k:"mark"},
  {d:"2026.11",c:"corp",pos:"up",t:T("SM CNC\n벤처기업 인증 획득","SM CNC certified\nas a venture company","SM CNC\n获得风险企业认证"),img:"img/h/venture.png",k:"badge"},
- {d:"2027.12",c:"mkt",pos:"dn",t:T("천만불 수출의 탑\n수상 (예정)","US$10 Million Export Tower\naward (expected)","千万美元出口塔奖\n（预计）"),img:"img/h/trophy.png",k:"trophy"},
+ {d:"2027.12",c:"mkt",pos:"dn",t:T("천만불 수출의 탑\n수상 (확정)","US$10 Million Export Tower\naward (confirmed)","千万美元出口塔奖\n（已确定）"),img:"img/h/trophy.png",k:"trophy"},
 ];
 const ORG=[
  [T("커머스 사업부","Commerce Division","贸易事业部"),[T("반도체 장비·소재·부품 무역","Equipment, materials & parts trade","半导体设备·材料·零部件贸易"),T("중고장비·설비 매각 및 이전","Used tool sale & relocation","二手设备出售及搬迁")]],
@@ -562,34 +593,45 @@ const DEALS=[
  {id:1,type:"equity",tag:T("지분투자","Equity investment","股权投资"),title:T("반도체 기업 지분투자 구조 자문","Equity structuring for a semiconductor company","半导体企业股权投资结构咨询"),
   pair:T("국내 반도체 기업 × 중국 상장사","Korean semiconductor company × Chinese listed company","韩国半导体企业 × 中国上市公司"),
   ind:T("반도체","Semiconductor","半导体"),inv:T("해외 상장사 (SI)","Overseas listed company (SI)","海外上市公司（SI）"),
-  size:T("1,000억원","KRW 100B","1,000亿韩元"),date:"2026.11",stage:4,status:T("합작사 설립 진행 중","JV being formed","合资公司设立中"),
+  size:T("800~1,000억원","KRW 80–100B","800~1,000亿韩元"),date:"2026.11",stage:4,status:T("합작사 설립 진행 중","JV being formed","合资公司设立中"),
   sum:T("국내 반도체 기업에 해외 상장사가 지분을 투자하고, 이후 현지 합작법인 설립까지 이어지는 거래입니다.","A listed overseas company invests in a Korean semiconductor company, followed by a local joint venture.","海外上市公司向韩国半导体企业进行股权投资，随后设立当地合资公司。"),
   pts:[T("홍콩 SPC를 통한 신주 인수 구조 설계","Structuring a new-share subscription via a Hong Kong SPC","设计通过香港SPC认购新股的结构"),T("투자 후 지분·이사회 구성안 마련","Post-deal shareholding and board composition plan","制定投资后股权及董事会构成方案"),T("실적 약정·기업가치 조정 조건 협의","Negotiating earn-out and valuation adjustment terms","协商业绩承诺及估值调整条件"),T("중국 현지 합작법인 설립 구상","Planning a joint venture in China","规划在中国设立当地合资公司")]},
  {id:2,type:"entry",tag:T("시장 공동진출","Joint market entry","共同市场进入"),title:T("전자소재 기업 해외 시장 공동진출 자문","Joint market entry for an electronic-materials company","电子材料企业共同进入海外市场咨询"),
   pair:T("국내 전자소재 화학기업 × 중국 산업그룹","Korean electronic-materials chemical company × Chinese industrial group","韩国电子材料化学企业 × 中国产业集团"),
   ind:T("전자소재 · 화학","Electronic materials · Chemicals","电子材料 · 化工"),inv:T("해외 산업그룹 (SI)","Overseas industrial group (SI)","海外产业集团（SI）"),
-  size:T("300억원","KRW 30B","300亿韩元"),date:"2026.10",stage:2,status:T("제안 · 협의 진행 중","Proposal · in discussion","提案 · 洽谈中"),
+  size:T("200~300억원","KRW 20–30B","200~300亿韩元"),date:"2026.10",stage:2,status:T("제안 · 협의 진행 중","Proposal · in discussion","提案 · 洽谈中"),
   sum:T("해외 산업그룹의 투자를 유치하고, 그룹 계열사를 초기 판로로 연결해 현지 시장에 함께 진출하는 거래입니다.","Bringing in investment from an overseas industrial group and using its affiliates as first customers to enter the market together.","引进海外产业集团投资，并以集团关联公司作为初期销售渠道，共同进入当地市场。"),
   pts:[T("중국 산업그룹의 투자 유치 구조 제안","Proposing an investment structure for the industrial group","提出中国产业集团投资引进结构"),T("투자 후 중국 현지 자회사 설립 구상","Planning a local subsidiary after investment","规划投资后设立中国当地子公司"),T("그룹 계열사를 초기 판로로 연계","Linking group affiliates as initial sales channels","以集团关联公司作为初期销售渠道"),T("NDA → MOU → 투자계약 추진","NDA → MOU → investment agreement","推进NDA → MOU → 投资协议")]},
  {id:3,type:"jv",tag:T("합작법인","Joint venture","合资公司"),title:T("포토레지스트 현지화 자문","Photoresist localization advisory","光刻胶本地化咨询"),
   pair:T("국내 포토레지스트 기업 × 중국 투자사","Korean photoresist company × Chinese investor","韩国光刻胶企业 × 中国投资方"),
   ind:T("반도체 소재 (포토레지스트)","Semiconductor materials (photoresist)","半导体材料（光刻胶）"),inv:T("해외 투자사 (FI)","Overseas investor (FI)","海外投资机构（FI）"),
-  size:T("600억원","KRW 60B","600亿韩元"),date:"2026.10",stage:2,status:T("제안 · 검토 진행 중","Proposal · under review","提案 · 评估中"),
+  size:T("500~600억원","KRW 50–60B","500~600亿韩元"),date:"2026.10",stage:2,status:T("제안 · 검토 진행 중","Proposal · under review","提案 · 评估中"),
   sum:T("반도체 회로를 새기는 감광액(포토레지스트) 기술을 가진 국내 기업과 해외 투자사가 현지 합작법인을 세우는 거래입니다.","A Korean company with photoresist technology (the light-sensitive coating used to pattern chips) and an overseas investor set up a local joint venture.","拥有光刻胶（用于在芯片上刻画电路的感光材料）技术的韩国企业与海外投资方共同设立当地合资公司。"),
   pts:[T("중국 현지 합작법인 설립 구조 제안","Proposing a local joint venture structure","提出中国当地合资公司设立结构"),T("기술 이전형 · 현지 개발형 협력안 설계","Designing technology-transfer and local-development options","设计技术转让型 · 当地开发型合作方案"),T("한국 기술 파트너 발굴 · 검증","Finding and vetting Korean technology partners","寻找并验证韩国技术伙伴"),T("현지 평가 Lab · 고객 인증 연계 구상","Planning a local evaluation lab and customer qualification","规划当地评估实验室及客户认证对接")]},
 ];
 const STAGES=[T("제안","Proposal","提案"),T("협의","Discussion","洽谈"),T("MOU","MOU","MOU"),T("계약","Agreement","签约"),T("설립 · 실행","Closing","设立 · 执行")];
 
 const PARTS=[
- {k:"pr",name:"Photo Resist · BARC",d:T("반도체 회로 모양을 빛으로 새길 때 쓰는 감광액(PR)과, 빛 반사를 막는 바닥막(BARC)입니다.","Photoresist (PR) is the light-sensitive coating used to print circuit patterns; BARC is the layer underneath that stops light reflecting back.","光刻胶（PR）是用光刻画电路图形的感光材料；BARC是防止光反射的底层涂膜。")},
- {k:"etch",name:"Etch Chamber Parts",d:T("반도체 웨이퍼를 깎아내는 식각 장비 안쪽에 들어가는 핵심 부품입니다. 상부 전극, 각종 링, 쿼츠, 실리콘, 소켓, EMI 부품을 공급합니다.","Core parts inside etch chambers, the tools that carve patterns into wafers: upper electrodes, rings, quartz, silicone, sockets and EMI parts.","用于刻蚀设备腔体内部的核心部件：上电极、各类环件、石英、硅胶、插座及EMI部件。")},
- {k:"sic",name:"Si / SiC Parts",d:T("식각 장비에서 소모되는 실리콘(Si)·탄화규소(SiC) 부품입니다.","Silicon (Si) and silicon carbide (SiC) consumables for etch tools.","刻蚀设备用硅（Si）· 碳化硅（SiC）耗材。")},
- {k:"quartz",name:"Quartz Parts",d:T("고온과 화학물질을 견디는 석영(쿼츠)으로 만든 장비 부품입니다.","Equipment parts made of quartz, which withstands heat and chemicals.","由耐高温、耐化学腐蚀的石英制成的设备部件。")},
- {k:"gasket",name:"Gasket · TIM · Socket · EMI",d:T("장비 부품 사이의 열을 전달하고, 틈을 막고, 전기 신호 간섭을 막아주는 부품입니다.","Parts that move heat between components, seal gaps and block electrical interference.","用于部件间导热、密封间隙及屏蔽电信号干扰的部件。")},
- {k:"cvd",name:"CVD Heater · ESC",d:T("웨이퍼를 데우는 히터와, 정전기로 웨이퍼를 붙잡아 두는 척(ESC)입니다.","Heaters that warm the wafer, and electrostatic chucks (ESC) that hold it in place.","加热晶圆的加热器，以及利用静电固定晶圆的静电吸盘（ESC）。")},
- {k:"mfc",name:"MFC · Vacuum Gauge · Valve",d:T("공정 가스의 양을 정밀하게 조절하고, 진공 압력을 재는 제어 부품입니다.","Control parts that meter process gas precisely and measure vacuum pressure.","精确控制工艺气体流量并测量真空压力的控制部件。")},
- {k:"pvd",name:"PVD · ALD",d:T("웨이퍼 위에 아주 얇은 막을 입히는 증착 장비입니다.","Deposition tools that coat wafers with very thin films.","在晶圆上沉积极薄膜层的沉积设备。")},
- {k:"cmp",name:"CMP Slurry",d:T("웨이퍼 표면을 평평하게 갈아내는 공정(CMP)에 쓰는 연마액입니다.","Slurries for CMP, the step that polishes the wafer surface flat.","用于将晶圆表面研磨平整的工艺（CMP）的抛光液。")}
+ {k:"pr",name:"Photo Resist · BARC",d:T("반도체 회로 모양을 빛으로 새길 때 쓰는 감광액(PR)과, 빛 반사를 막는 바닥막(BARC)입니다.","Photoresist (PR) is the light-sensitive coating used to print circuit patterns; BARC is the layer underneath that stops light reflecting back.","光刻胶（PR）是用光刻画电路图形的感光材料；BARC是防止光反射的底层涂膜。"),imgs:["img/g-pr.jpg"],
+  b:[T("국내 대형 메모리 고객에 i-Line · KrF PR 10년 이상 양산 공급","10+ years of volume supply of i-Line and KrF PR to a major Korean memory maker","向韩国大型存储器客户量产供应i-Line · KrF PR 10年以上"),T("2019년 일본 수출 규제 이후 수입 PR 대체 공급 실적","Replaced imported PR after Japan's 2019 export restrictions","2019年日本出口管制后替代进口PR的供货实绩"),T("i-line 노광 표준 조건에서 평가 완료, 공정 변경 없이 도입 가능","Qualified under standard i-line exposure conditions; no process change needed","已在i-line曝光标准条件下完成评估，无需变更工艺即可导入")],
+  tbl:{h:[T("제품군","Product","产品"),T("구성","Grades","规格数"),T("막두께 · 해상도","Thickness · resolution","膜厚 · 分辨率"),T("적용 공정","Process","适用工艺")],r:[["i-Line PR (Positive)",T("7종","7","7种"),"1.1–6.0µm · 0.35µm L/S",T("식각 · 이온주입 · Al 배선 · RDL","Etch · implant · Al wiring · RDL","刻蚀 · 离子注入 · Al布线 · RDL")],["i-Line PR (Negative)",T("5종","5","5种"),"0.13–10µm · 0.3µm trench",T("Lift-off · MEMS · 패키징","Lift-off · MEMS · packaging","Lift-off · MEMS · 封装")],["ArF · KrF BARC",T("5종","5","5种"),"0.02–0.11µm",T("ArF 액침 · Gap-fill · KrF","ArF immersion · gap-fill · KrF","ArF浸没 · Gap-fill · KrF")],["KrF · ArF PR",T("개발/양산","Dev / volume","开发/量产"),"248nm · 193nm",T("KrF 양산, ArF 양산 준비","KrF in volume, ArF preparing","KrF量产，ArF量产准备中")]]}},
+ {k:"etch",name:"Etch Chamber Parts",d:T("반도체 웨이퍼를 깎아내는 식각 장비 안쪽에 들어가는 핵심 부품입니다. 상부 전극, 각종 링, 쿼츠, 실리콘, 소켓, EMI 부품을 공급합니다.","Core parts inside etch chambers, the tools that carve patterns into wafers: upper electrodes, rings, quartz, silicone, sockets and EMI parts.","用于刻蚀设备腔体内部的核心部件：上电极、各类环件、石英、硅胶、插座及EMI部件。"),imgs:["img/g-shapeue.jpg","img/g-cring.jpg"],
+  b:[T("Shape / Outer Upper Electrode (상부 전극)","Shape / Outer Upper Electrode","Shape / Outer Upper Electrode（上电极）"),T("C-Ring · Edge Ring · O-pad","C-Ring · Edge Ring · O-pad","C-Ring · Edge Ring · O-pad"),T("Quartz · Silicone · Socket · EMI 부품","Quartz, silicone, socket and EMI parts","Quartz · Silicone · Socket · EMI部件")]},
+ {k:"sic",name:"Si / SiC Parts",d:T("식각 장비에서 소모되는 실리콘(Si)·탄화규소(SiC) 부품입니다.","Silicon (Si) and silicon carbide (SiC) consumables for etch tools.","刻蚀设备用硅（Si）· 碳化硅（SiC）耗材。"),imgs:["img/g-showerhead.jpg","img/g-focusring.jpg","img/g-cring.jpg","img/g-shapeue.jpg"],
+  b:[T("식각 챔버용 Showerhead (Lapping · Polishing), CEL Body, Gas Shower","Showerheads for etch chambers (lapping · polishing), CEL body, gas shower","刻蚀腔体用喷淋头（研磨 · 抛光）、CEL Body、Gas Shower"),T("Focus Ring · Poly Outer Ring · C-Ring · Shape Upper Electrode","Focus Ring · Poly Outer Ring · C-Ring · Shape Upper Electrode","Focus Ring · Poly Outer Ring · C-Ring · Shape Upper Electrode"),T("PCD · EDM 드릴링, 3D Etching, 손상층(Damage Layer) 관리 기술 내재화","In-house PCD and EDM drilling, 3D etching and damage-layer control","掌握PCD · EDM钻孔、3D刻蚀、损伤层管理技术"),T("순정품(OEM) 대비 교체 주기 30~35% 개선, 원가 최대 50% 절감 사례","30–35% longer replacement cycle than OEM parts, up to 50% cost savings","更换周期较原厂件改善30~35%，成本最多降低50%")]},
+ {k:"quartz",name:"Quartz Parts",d:T("고온과 화학물질을 견디는 석영(쿼츠)으로 만든 장비 부품입니다.","Equipment parts made of quartz, which withstands heat and chemicals.","由耐高温、耐化学腐蚀的石英制成的设备部件。"),imgs:["img/g-qboat.jpg","img/g-qtube.jpg","img/g-qshield.jpg","img/g-qfocus.jpg"],
+  b:[T("식각용 Focus Ring · Shield Ring · Cover Ring · Insulator · Quartz Window","For etch: focus, shield and cover rings, insulators, quartz windows","刻蚀用Focus Ring · Shield Ring · Cover Ring · Insulator · Quartz Window"),T("확산 · 산화 공정용 Quartz Boat · Quartz Tube · Quartz Bath","For diffusion and oxidation: quartz boats, tubes and baths","扩散 · 氧化工艺用石英舟 · 石英管 · 石英槽"),T("제조 협력사: CNC 23기 · MCT 9기, 연마 · 열처리 · 화염 연마 일괄 공정","Manufacturing partner: 23 CNC and 9 MCT machines; polishing, annealing and fire polishing in-house","制造合作伙伴：CNC 23台 · MCT 9台，研磨 · 退火 · 火抛光一体化工艺"),T("국내 대형 반도체 제조사 2차 협력사, ISO 9001 인증","Tier-2 supplier to a major Korean chipmaker, ISO 9001 certified","韩国大型半导体制造商二级供应商，ISO 9001认证")]},
+ {k:"gasket",name:"Gasket · TIM · Socket · EMI",d:T("장비 부품 사이의 열을 전달하고, 틈을 막고, 전기 신호 간섭을 막아주는 부품입니다.","Parts that move heat between components, seal gaps and block electrical interference.","用于部件间导热、密封间隙及屏蔽电信号干扰的部件。"),imgs:["img/g-gasket.jpg","img/g-socket.jpg"],
+  b:[T("식각 챔버용 TIM Gasket · GEL Pad · Q-Pad, 열전도 0.25~11.5W 등급","TIM gaskets, gel pads and Q-pads for etch chambers, 0.25–11.5 W thermal grades","刻蚀腔体用TIM Gasket · GEL Pad · Q-Pad，导热0.25~11.5W等级"),T("상부 전극 체결용 Stud Socket · Seal Socket, 자동 조립 설비로 조립 불량 방지","Stud and seal sockets for upper electrodes, assembled on automated lines","上电极紧固用Stud Socket · Seal Socket，自动组装设备防止组装不良"),T("RF 접지용 EMI Gasket (BeCu · SUS · Hastelloy · Elgiloy), Weldment, Lift Pin","EMI gaskets for RF grounding (BeCu, SUS, Hastelloy, Elgiloy), weldments, lift pins","射频接地用EMI垫片（BeCu · SUS · Hastelloy · Elgiloy）、焊接件、顶针"),T("글로벌 주요 식각 장비에 적용, 국내 대형 반도체 제조사 Gasket 2차 벤더","Used on leading global etch tools; tier-2 gasket vendor to a major Korean chipmaker","适用于全球主要刻蚀设备，韩国大型半导体制造商垫片二级供应商")]},
+ {k:"cvd",name:"CVD Heater · ESC",d:T("웨이퍼를 데우는 히터와, 정전기로 웨이퍼를 붙잡아 두는 척(ESC)입니다.","Heaters that warm the wafer, and electrostatic chucks (ESC) that hold it in place.","加热晶圆的加热器，以及利用静电固定晶圆的静电吸盘（ESC）。"),imgs:["img/g-heater.jpg","img/g-esc1.jpg","img/g-esc3.jpg","img/g-esc4.jpg"],
+  b:[T("Single-Zone · Dual-Zone CVD Heater","Single-zone and dual-zone CVD heaters","单区 · 双区CVD加热器"),T("Chucking · He · Cathode 기능 개발(CIP) 및 수리","Chucking, He and cathode function development (CIP) and repair","Chucking · He · Cathode功能开发（CIP）及维修"),T("ESC: 고순도 Al2O3 Plate · Coating, 2/4-Zone","ESC: high-purity Al2O3 plates and coatings, 2/4-zone","ESC：高纯Al2O3板 · 涂层，2/4区"),T("Uni/Bi-Polar 전극, Ceramic Plate 표면 재생","Uni/bi-polar electrodes, ceramic plate resurfacing","单/双极电极，陶瓷板表面再生")]},
+ {k:"mfc",name:"MFC · Vacuum Gauge · Valve",d:T("공정 가스의 양을 정밀하게 조절하고, 진공 압력을 재는 제어 부품입니다.","Control parts that meter process gas precisely and measure vacuum pressure.","精确控制工艺气体流量并测量真空压力的控制部件。"),imgs:["img/g-mfc.jpg","img/g-gauge.jpg"],
+  b:[T("MFC(가스 유량 제어기): 정확도 ±1.0% S.P., 응답 0.8초 이하, 연간 Drift 0.1% F.S. 미만","MFC (mass flow controller): ±1.0% S.P. accuracy, ≤0.8 s response, <0.1% F.S. annual drift","MFC（质量流量控制器）：精度±1.0% S.P.，响应≤0.8秒，年漂移<0.1% F.S."),T("정전용량식 진공 게이지: 정확도 0.25%, 측정 범위 10~1000 Torr","Capacitance vacuum gauge: 0.25% accuracy, 10–1000 Torr range","电容式真空计：精度0.25%，量程10~1000 Torr"),T("Vaporizer (ZrO · HfO), APC Valve (Butterfly · Pendulum), Toxic Gas Heater Block","Vaporizers (ZrO, HfO), APC valves (butterfly, pendulum), toxic-gas heater blocks","汽化器（ZrO · HfO）、APC阀（蝶阀 · 摆阀）、有毒气体加热块"),T("제조 협력사: 중국 내 800여 고객 보유","Manufacturing partner with around 800 customers in China","制造合作伙伴：在中国拥有约800家客户")]},
+ {k:"pvd",name:"PVD · ALD",d:T("웨이퍼 위에 아주 얇은 막을 입히는 증착 장비입니다.","Deposition tools that coat wafers with very thin films.","在晶圆上沉积极薄膜层的沉积设备。"),imgs:["img/g-pvd1.jpg"],
+  b:[T("ALD 원자층 증착 시스템: 나노 단위 두께 제어, 우수한 단차 피복","ALD systems: nanometre thickness control and excellent step coverage","ALD原子层沉积系统：纳米级厚度控制，优异的台阶覆盖"),T("반도체용 스퍼터링: 포토마스크 크롬막, 웨이퍼 EMI 차폐막 (Cu+SUS) 양산","Sputtering: photomask chrome films and wafer EMI shielding (Cu+SUS) in volume","半导体溅射：光掩膜铬膜、晶圆EMI屏蔽膜（Cu+SUS）量产"),T("TGV 심공 · 관통공 스퍼터링: 홀 φ20µm, 종횡비 1:20, 첨단 패키징 대응","TGV deep-hole sputtering: φ20µm holes, 1:20 aspect ratio, for advanced packaging","TGV深孔 · 通孔溅射：孔径φ20µm，深宽比1:20，适用先进封装")]},
+ {k:"cmp",name:"CMP Slurry",d:T("웨이퍼 표면을 평평하게 갈아내는 공정(CMP)에 쓰는 연마액입니다.","Slurries for CMP, the step that polishes the wafer surface flat.","用于将晶圆表面研磨平整的工艺（CMP）的抛光液。"),imgs:[],
+  b:[T("Zirconia · Wet Ceria · UHPCS 연마재 자체 생산","In-house zirconia, wet ceria and UHPCS abrasives","自产氧化锆 · 湿法氧化铈 · UHPCS磨料"),T("Hard Mask ACL CMP: 탄소 돌기 결함 제거율 ~100%, 양산 공급 중","Hard-mask ACL CMP: ~100% carbon bump defect removal, in volume supply","Hard Mask ACL CMP：碳突起缺陷去除率约100%，量产供货中"),T("Class 10 클린룸 R&D 센터 (362㎡), 300mm CMP 평가 설비 보유","Class 10 cleanroom R&D center (362 m²) with 300 mm CMP evaluation tools","Class 10洁净室研发中心（362㎡），配备300mm CMP评估设备"),T("KrF PR용 PHS Polymer 사업 병행","Also supplies PHS polymer for KrF PR","同时经营KrF PR用PHS聚合物业务")],
+  tbl:{h:[T("제품","Product","产品"),T("연마재","Abrasive","磨料"),T("적용","Application","应用"),T("단계","Status","阶段")],r:[["Hard Mask ACL","Zirconia",T("NAND · 탄소 돌기 결함 제거","NAND · carbon bump removal","NAND · 碳突起缺陷去除"),T("양산","Volume","量产")],["Gap-fill ACL","Zirconia",T("NAND · 고선택비 · 고연마율","NAND · high selectivity and removal rate","NAND · 高选择比 · 高研磨率"),T("평가","Evaluation","评估")],["W (Tungsten) CMP","Colloidal",T("DRAM · NAND · Dishing 최소화","DRAM · NAND · minimal dishing","DRAM · NAND · 最小化凹陷"),T("개발 완료","Developed","开发完成")],["Dielectric High RR","Colloidal",T("PKG · 고단차 제거 · Self Stop","Packaging · high step removal · self-stop","封装 · 高台阶去除 · 自停止"),T("평가","Evaluation","评估")],["ILD / ISO CMP","Wet Ceria",T("DRAM · Isolation · 고선택비","DRAM · isolation · high selectivity","DRAM · 隔离 · 高选择比"),T("평가","Evaluation","评估")],["Wafer Polishing","UHPCS",T("웨이퍼 제조 · 저금속 불순물","Wafer manufacturing · low metal impurities","晶圆制造 · 低金属杂质"),T("평가","Evaluation","评估")]]}},
 ];
 
 /* ---------- render helpers ---------- */
@@ -633,7 +675,7 @@ P.home=()=>{
   <div class="biz">${biz("consulting",["advisory","valuechain","track","deals"])}${biz("commerce",["plant","equipment","parts"])}</div></div></section>
   <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Latest opportunities</div><h2>${x(U.deals)}</h2><p>${x(T("현재 진행 중인 투자·합작 기회입니다.","Investment and joint venture opportunities in progress.","目前正在进行的投资 · 合资机会。"))}</p></div><a class="link-all" href="#deals">${x(U.viewAll)}</a></div>
   <div class="grid3">${DEALS.map(dealCard).join("")}</div></div></section>
-  <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Track record</div><h2>${x(U.track)}</h2></div></div>
+  <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Business results</div><h2>${x(U.track)}</h2></div></div>
   <div class="hl"><a href="#track"><div class="eyebrow">${x(T("국제 합작법인 설립 자문","Cross-border JV advisory","跨国合资公司设立咨询"))}</div><div class="num">500<small>${x(T("억원","× 100M KRW","亿韩元"))}</small></div><p>${x(T("규모의 합작계약(JVA) 체결 완료 · 성공보수 확정","Joint venture agreement signed · success fee confirmed","规模的合资协议（JVA）已签署 · 成功报酬确定"))}</p><span class="go">${x(U.more)}</span></a>
   <a href="#plant"><div class="eyebrow">${x(T("반도체 생산 설비 수출 계약","Fab tool export contract","半导体生产设备出口合同"))}</div><div class="num">113<small>${x(T("대","units","台"))}</small></div><p>${x(T("설비 매입부터 해외 현지 재설치까지 일괄 수행","End to end, from purchase to reinstallation abroad","从设备收购到海外当地重装一揽子执行"))}</p><span class="go">${x(U.more)}</span></a></div></div></section>
   <section class="sec bg2"><div class="wrap reach"><div><div class="eyebrow">Global reach</div><h2 style="font-size:clamp(26px,3.2vw,36px);margin:10px 0 12px">${x(T("5개국 8개 거점","8 sites in 5 countries","5国8处据点"))}</h2><p style="color:var(--muted)">${x(T("한국 본사와 자회사, 제조 기지, 그리고 해외 협업망이 하나의 네트워크로 움직입니다.","Our headquarters, subsidiary, manufacturing base and overseas partners work as one network.","总部、子公司、制造基地与海外合作网络作为一个整体协同运作。"))}</p>
@@ -641,12 +683,12 @@ P.home=()=>{
   <p style="margin-top:22px"><a class="link-all" href="#network">${x(U.network)} →</a></p></div>${mapHTML()}</div></section>
   ${ctaBand()}`;
 };
-function ctaBand(){return `<section class="ctaband"><div class="wrap"><div><h2>${x(T("M&A · 투자유치를 검토 중이신가요?","Considering M&A or raising investment?","正在考虑并购或引进投资吗？"))}</h2><p>${x(T("문의 내용은 비밀로 다루며, 담당 이사가 직접 회신드립니다.","All inquiries are confidential and answered by a director.","咨询内容严格保密，由负责理事直接回复。"))}</p></div><a class="btn w" href="#contact">${x(U.contact)}</a></div></section>`}
+function ctaBand(){return `<section class="ctaband"><div class="wrap"><div><h2>${x(T("M&A · 투자유치를 검토 중이신가요?","Considering M&A or raising investment?","正在考虑并购或引进投资吗？"))}</h2><p>${x(T("문의 내용은 비밀로 다룹니다.","All inquiries are kept confidential.","咨询内容严格保密。"))}</p></div><a class="btn w" href="#contact">${x(U.contact)}</a></div></section>`}
 
 P.overview=()=>phead("overview",U.overview,null,"img/hq.jpg")+`<section class="sec"><div class="wrap about">${ph("img/hq.jpg",T("본사 · 경기도 화성시 동탄","Headquarters · Dongtan, Hwaseong","总部 · 京畿道华城市东滩"))}<div><div class="eyebrow">About us</div><h2>${x(T("글로벌 네트워크로 기업의 다음 성장을 연결합니다","Connecting companies to their next stage of growth through a global network","以全球网络助力企业迈向下一阶段的成长"))}</h2>
  <p class="lead">${x(T("에스엠씨앤씨는 산업 현장에 필요한 장비와 부품을 공급하는 커머스 사업과, 기업의 인수·합병과 해외 투자를 돕는 컨설팅 사업을 함께 운영합니다.","SMC&C runs Commerce, supplying the equipment and parts that industry needs, and Consulting, helping companies with M&A and overseas investment.","SMC&C同时经营为产业现场供应设备与零部件的贸易业务，以及协助企业并购与海外投资的咨询业务。"))}</p>
  <div class="divs"><div><b>${x(U.commerce)}</b><span>${x(T("산업 장비·부품 공급, 설비 이전, 해외 무역","Industrial equipment and parts, line relocation, international trade","产业设备·零部件供应、设备搬迁、海外贸易"))}</span></div><div class="c2"><b>${x(U.consulting)}</b><span>${x(T("기업 인수·합병(M&A) 자문, 기업 간 해외 투자 연결","M&A advisory, connecting cross-border investment","并购咨询，促成企业间海外投资"))}</span></div></div>
- <dl class="facts3"><div><dt>${x(T("설립","Founded","成立"))}</dt><dd class="mono">2022.06</dd></div><div><dt>${x(T("소재지","Location","所在地"))}</dt><dd>${x(T("경기도 화성시 동탄","Dongtan, Hwaseong","京畿道华城市东滩"))}</dd></div><div><dt>${x(T("매출","Revenue","销售额"))}</dt><dd>${x(T("100억원 돌파 (2026.07)","KRW 10B+ (Jul 2026)","突破100亿韩元（2026.07）"))}</dd></div></dl></div></div></section>`+ctaBand();
+ <dl class="facts3"><div><dt>${x(T("설립","Founded","成立"))}</dt><dd class="mono">2022.06</dd></div><div><dt>${x(T("소재지","Location","所在地"))}</dt><dd>${x(T("경기도 화성시 동탄","Dongtan, Hwaseong","京畿道华城市东滩"))}</dd></div></dl></div></div></section>`+ctaBand();
 
 P.history=()=>phead("history",U.history,T("2022년 설립 이후의 주요 발자취입니다.","Key milestones since 2022.","2022年成立以来的主要历程。"),"img/hq.jpg")+`<section class="sec hist-sec"><div class="wrap">
  <div class="tl5"><div class="tl5-band"><span>SINCE 2022</span></div>
@@ -685,7 +727,7 @@ P.plant=()=>phead("plant",U.plant,T("공정 설비를 매입·이전 또는 수�
  `<section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Process</div><h2>${x(T("설비 이전 5단계","Five steps of a line relocation","设备搬迁五个阶段"))}</h2></div></div>
  ${stepsHTML([[T("설비 발굴 · 매입","Sourcing","寻源 · 收购"),T("국내 공정 설비 선별 · 매입 계약","Selecting tools and signing purchase","筛选设备并签订收购合同")],[T("설비 검증","Verification","设备验证"),T("설비 상태 · 사양 · 가동 이력 확인","Condition, spec and run history","确认状态 · 规格 · 运行记录")],[T("해체 · 포장","Teardown","拆机 · 包装"),T("해체 · 포장 (도급)","Teardown and packing (contracted)","拆机 · 包装（外包）")],[T("포장 · 수출 · 운송","Export & shipping","包装 · 出口 · 运输"),T("해외 수출을 위한 절차 진행","Export procedures and freight","办理出口相关手续")],[T("현지 재설치","Reinstallation","当地重装"),T("해외 고객 공장 설치 · 시운전","Installation and start-up at the customer's plant","海外客户工厂安装 · 试运行")]])}
  <div class="gal g4" style="margin-top:36px">${ph("img/fab1.jpg",T("클린룸 생산 라인","Cleanroom production line","洁净室生产线"),"over")}${ph("img/fab2.jpg",T("이전 대상 반도체 설비","Semiconductor tool for relocation","待搬迁的半导体设备"),"over")}${ph("img/fab3.jpg",T("이전 대상 계측 설비","Metrology tool for relocation","待搬迁的量测设备"),"over")}${ph("img/fab4.jpg",T("해체 · 포장 후 출하 대기","Crated and awaiting shipment","拆机包装后待出货"),"over")}</div></div></section>
- <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("커머스 사업부 핵심 성과","Commerce key result","贸易事业部核心业绩"))}</h2></div></div>
+ <section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("커머스 사업부 비즈니스 성과","Commerce business results","贸易事业部业务成果"))}</h2></div></div>
  <div class="result"><div class="big"><div class="eyebrow">${x(T("2026 계약 체결","Contract signed 2026","2026年签约"))}</div><div class="num">113<small>${x(T("대","units","台"))}</small></div><p>${x(T("반도체 생산 설비 해외 수출 계약","Export contract for semiconductor production tools","半导体生产设备出口合同"))}</p></div>
  <dl><div><dt>${x(T("계약 범위","Scope","合同范围"))}</dt><dd>${x(T("설비 매입부터 중국 현지 재설치까지 일괄 수행","End to end, from purchase to reinstallation in China","从设备收购到中国当地重装一揽子执行"))}</dd></div>
  <div><dt>${x(T("설비 구성","Tools","设备构成"))}</dt><dd>${x(T("국내 중견기업 보유 설비 25대 + 신규 설비 88대","25 tools from a Korean mid-size maker + 88 new tools","韩国中坚企业持有设备25台 + 新设备88台"))}</dd></div>
@@ -707,9 +749,19 @@ P.parts=()=>phead("parts",U.parts,T("반도체 정밀부품 · 소재와 전자�
  `<section class="sec"><div class="wrap intro"><div><div class="eyebrow">Commerce · 03</div><h2>${x(T("반도체 공정 전반의 부품 · 소재","Parts and materials across the fab process","覆盖半导体全工艺的零部件 · 材料"))}</h2><p class="lead">${x(T("반도체 공정에 들어가는 소모품과 핵심 부품을 검증된 제조 파트너와 함께 공급합니다.","With proven manufacturing partners, we supply consumables and key components used across the fab process.","与经过验证的制造伙伴一起，供应半导体工艺所需的耗材与核心部件。"))}</p></div>
  ${bul([T("한국 제조사 소싱 · 품질 확인","Korean supplier sourcing and QC","韩国厂商寻源 · 质量确认"),T("통신 · 전원 · 로봇 · 가전 고객 대상","Customers in telecom, power, robotics and appliances","面向通信 · 电源 · 机器人 · 家电客户"),T("수출 통관 · 물류 관리","Export customs and logistics","出口报关 · 物流管理"),T("결제 · 납기 일원화","Single point for payment and delivery","付款 · 交期统一管理")])}</div></section>
  <section class="sec bg2"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Product line-up</div><h2>${x(T("제품 라인업","Product line-up","产品阵容"))}</h2></div></div>
- <ol class="lineup">${PARTS.map(a=>`<li><b>${a.name}</b><span>${x(a.d)}</span></li>`).join("")}</ol>
+ <ol class="lineup">${PARTS.map(a=>`<li><a href="#part-${a.k}"><b>${a.name}</b><span>${x(a.d)}</span><em>${x(T("자세히 보기 →","Details →","查看详情 →"))}</em></a></li>`).join("")}</ol>
  <div class="gal g3 pgal">${[["img/g-showerhead.jpg","Showerhead"],["img/g-focusring.jpg","Focus Ring"],["img/g-cring.jpg","C-Ring"],["img/g-qboat.jpg","Quartz Boat"],["img/g-qtube.jpg","Quartz Tube"],["img/g-heater.jpg","CVD Heater"]].map(g=>ph(g[0],g[1])).join("")}</div></div></section>`+ctaBand();
 
+P.part=k=>{
+  const i=PARTS.findIndex(a=>a.k===k);if(i<0)return P.parts();const p=PARTS[i],prev=PARTS[(i+PARTS.length-1)%PARTS.length],next=PARTS[(i+1)%PARTS.length];
+  const tbl=p.tbl?`<div class="tbl"><table><thead><tr>${p.tbl.h.map(h=>`<th>${x(h)}</th>`).join("")}</tr></thead><tbody>${p.tbl.r.map(r=>`<tr>${r.map(c=>`<td>${x(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`:"";
+  const imgs=p.imgs.length?`<div class="pd-imgs n${Math.min(p.imgs.length,4)}">${p.imgs.map(s=>ph(s,null)).join("")}</div>`:"";
+  return phead("parts",p.name,p.d,"img/fab3.jpg").replace(`<span>${p.name}</span>`,`<a href="#parts">${x(U.parts)}</a><span>›</span><span>${p.name}</span>`)+
+  `<section class="sec"><div class="wrap"><div class="pd${imgs?"":" noimg-pd"}"><div class="pd-main"><a class="link-all" href="#parts">${x(T("← 제품 라인업으로","← Back to line-up","← 返回产品阵容"))}</a>
+  <div class="eyebrow" style="margin-top:22px">Product ${String(i+1).padStart(2,"0")} / ${String(PARTS.length).padStart(2,"0")}</div><h2 class="pd-h">${p.name}</h2><p class="pd-d">${x(p.d)}</p>
+  <h3 class="pd-sub">${x(T("주요 특징","Key features","主要特点"))}</h3>${bul(p.b)}${tbl}</div>${imgs?`<div class="pd-side">${imgs}</div>`:""}</div>
+  <nav class="pd-nav"><a href="#part-${prev.k}"><small>${x(T("이전 제품","Previous","上一个"))}</small><b>← ${prev.name}</b></a><a href="#part-${next.k}" style="text-align:right"><small>${x(T("다음 제품","Next","下一个"))}</small><b>${next.name} →</b></a></nav></div></section>`+ctaBand();
+};
 P.advisory=()=>phead("advisory",U.advisory,T("투자자를 찾는 일부터 계약 체결과 현지 법인 설립까지, 거래의 처음과 끝을 함께합니다.","From finding investors to signing and setting up the local entity, we stay with the deal from start to finish.","从寻找投资方到签约及设立当地法人，全程参与交易。"),"img/hq.jpg")+
  `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Services</div><h2>${x(T("국경을 넘는 거래를 처음부터 끝까지","Cross-border deals, from first contact to closing","跨境交易，从开始到完成"))}</h2><p>${x(T("언어와 제도, 기업 문화가 다른 나라의 기업 사이에서 상대를 찾고, 조건을 맞추고, 계약을 마무리합니다.","Between companies from countries with different languages, rules and cultures, we find the counterpart, align the terms and close.","在语言、制度与企业文化各不相同的各国企业之间，寻找合作方、协调条件并完成签约。"))}</p></div></div>
  <div class="grid3">${[[T("M&A 자문","M&A advisory","并购咨询"),T("기업을 사고팔거나 지분을 인수하려는 기업에 맞는 상대를 찾고, 거래 구조와 조건 협상을 돕습니다.","For companies looking to buy, sell or take a stake, we find the right counterpart and support structuring and negotiation.","为有意收购、出售企业或取得股权的公司寻找合适对象，并协助交易结构与条件谈判。")],[T("투자유치","Investment raising","投资引进"),T("성장 자금이 필요한 기업과 해외 상장사, 산업그룹, 투자사를 연결합니다.","We connect companies that need growth capital with listed companies, industrial groups and investors abroad.","为需要成长资金的企业对接海外上市公司、产业集团及投资机构。")],[T("합작법인 · 해외 진출","Joint ventures & market entry","合资公司 · 海外拓展"),T("서로 다른 나라의 기업이 함께 세우는 합작법인과 현지 법인 설립, 해외 시장 공동 진출을 지원합니다.","We support cross-border joint ventures, local entity set-up and joint market entry.","支持跨国合资公司及当地法人设立，共同进入海外市场。")]].map(c=>`<div class="card"><h3>${x(c[0])}</h3><p>${x(c[1])}</p></div>`).join("")}</div></div></section>
@@ -723,12 +775,12 @@ const VC=[
  ["Driver IC",T("구동칩","Display driver chip","驱动芯片"),["lxsemicon","steco","novatek","synaptics","himax","magnachip"]],
 ];
 P.valuechain=()=>phead("valuechain",U.valuechain,T("반도체용 기판(Substrate) 밸류체인 안의 기업과 투자자를 연결합니다.","We connect companies and investors along the semiconductor substrate value chain.","连接半导体基板价值链中的企业与投资方。"),"img/hq.jpg")+
- `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Substrate value chain</div><h2>${x(T("소재부터 구동칩까지, 밸류체인 전체와 연결합니다","From materials to driver chips, connected across the whole chain","从材料到驱动芯片，连接整条价值链"))}</h2></div></div>
+ `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key partners</div><h2>${x(T("소재부터 구동칩까지, 밸류체인 전체와 연결합니다","From materials to driver chips, connected across the whole chain","从材料到驱动芯片，连接整条价值链"))}</h2></div></div>
  <div class="vcg">${VC.map((c,i)=>`<div class="vcs"><div class="vch"><span class="mono">0${i+1}</span><b>${c[0]}</b><small>${x(c[1])}</small></div><div class="vcl">${c[2].map(k=>`<span class="vlogo"><img src="img/vc/${k}.png" alt="${k}" loading="lazy"></span>`).join("")}</div></div>`).join("")}</div>
  <p class="note" style="margin-top:24px">${x(T("각 단계의 주요 기업과 투자자 · 수요처를 연결하며, M&A 자문 · 지분투자 구조 자문 · 합작법인 설립 · 해외 시장 공동진출을 지원합니다.","We connect leading companies at each stage with investors and buyers, supporting M&A, equity structuring, joint ventures and joint market entry.","连接各环节主要企业与投资方 · 需求方，支持并购咨询 · 股权结构咨询 · 合资公司设立 · 共同进入海外市场。"))}</p></div></section>`+ctaBand();
 
 P.track=()=>phead("track",U.track,T("국경을 넘는 거래를 성사시킨 주요 실적입니다.","Key cross-border deals we have closed.","我们促成的主要跨境交易业绩。"),"img/hq.jpg")+
- `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("컨설팅 사업부 핵심 성과","Consulting key result","咨询事业部核心业绩"))}</h2></div></div>
+ `<section class="sec"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Key result</div><h2>${x(T("컨설팅 사업부 비즈니스 성과","Consulting business results","咨询事业部业务成果"))}</h2></div></div>
  <div class="result"><div class="big"><div class="eyebrow">${x(T("국제 합작법인 설립 자문","Cross-border JV advisory","跨国合资公司设立咨询"))}</div><div class="num">500<small>${x(T("억원","× 100M KRW","亿韩元"))}</small></div><p>${x(T("규모의 합작계약 체결 완료 · 성공보수 확정","Joint venture agreement signed · success fee confirmed","规模的合资协议已签署 · 成功报酬确定"))}</p></div>
  <dl><div><dt>${x(T("당사자","Parties","当事方"))}</dt><dd>${x(T("S사(한국) × J사(중국)","Company S (Korea) × Company J (China)","S公司（韩国）× J公司（中国）"))}</dd></div>
  <div><dt>${x(T("거래 내용","Transaction","交易内容"))}</dt><dd>${x(T("합작법인(JV) 설립 및 합작계약(JVA) 체결","Joint venture (JV) formation and JVA signing","设立合资公司（JV）并签署合资协议（JVA）"))}</dd></div>
@@ -760,10 +812,9 @@ P.deal=id=>{
 };
 
 let askDeal=null;
-P.contact=()=>phead("contact",U.contact,T("M&A, 투자유치, 합작 진출, 장비 · 부품 공급에 관한 문의를 남겨 주시면 담당자가 회신드립니다. 문의 내용은 비밀로 다룹니다.","Send us your inquiry about M&A, investment, joint ventures or equipment and parts. All inquiries are confidential.","如有并购、投资引进、合资拓展或设备 · 零部件供应方面的问题，请留言。咨询内容严格保密。"),"img/hq.jpg")+
+P.contact=()=>phead("contact",U.contact,T("M&A, 투자유치, 합작 진출, 장비 · 부품 공급에 관한 문의를 남겨 주세요. 문의 내용은 비밀로 다룹니다.","Send us your inquiry about M&A, investment, joint ventures or equipment and parts. All inquiries are confidential.","如有并购、投资引进、合资拓展或设备 · 零部件供应方面的问题，请留言。咨询内容严格保密。"),"img/hq.jpg")+
  `<section class="sec"><div class="wrap contact"><div class="cinfo"><dl>
- <div><dt>${x(T("담당","Contact person","负责人"))}</dt><dd>${x(T("남덕인 이사","Daniel Nam, Director","Daniel Nam 理事"))}</dd></div>
- <div><dt>${x(T("이메일","Email","邮箱"))}</dt><dd class="copy"><span id="mail">daniel.nam@sm-cnc.kr</span><button type="button" id="copyMail">${x(T("복사","Copy","复制"))}</button></dd></div>
+ <div><dt>${x(T("이메일","Email","邮箱"))}</dt><dd class="copy"><span id="mail">inquiry@sm-cnc.kr</span><button type="button" id="copyMail">${x(T("복사","Copy","复制"))}</button></dd></div>
  <div><dt>${x(T("주소","Address","地址"))}</dt><dd>${x(ADDR)}</dd></div></dl></div>
  <form class="inq" id="inq" novalidate>
  <div class="row2"><div class="fld"><label for="f-email">${x(F.fe)}<em>*</em></label><input id="f-email" type="email" autocomplete="email" placeholder="name@company.com"><div class="err" id="e-email"></div></div>
@@ -777,19 +828,19 @@ const ADDR=T("경기도 화성시 동탄구 동탄영천로 150, A동 1302–130
 const F={fe:T("이메일","Email","邮箱"),fp:T("연락처","Phone","联系电话"),fs:T("제목","Subject","标题"),fb:T("내용","Message","内容"),fa:T("첨부파일","Attachment","附件"),pick:T("파일 선택","Choose file","选择文件"),none:T("선택된 파일 없음 · 최대 10MB","No file selected · up to 10 MB","未选择文件 · 最大10MB"),
  ag:T("문의 회신을 위해 이메일과 연락처를 수집 · 이용하는 데 동의합니다.","I agree that my email and phone number may be used to reply to this inquiry.","同意为回复咨询而收集和使用我的邮箱及联系电话。"),send:T("문의 보내기","Send inquiry","提交咨询"),
  req:T("필수 입력 항목입니다.","This field is required.","此项为必填项。"),mail:T("이메일 형식을 확인해 주세요.","Check the email address.","请检查邮箱格式。"),size:T("10MB 이하 파일만 첨부할 수 있습니다.","Files must be 10 MB or smaller.","仅可上传10MB以下的文件。"),agree:T("동의가 필요합니다.","Please agree to continue.","请勾选同意。"),
- ok:T("입력 내용이 확인되었습니다. 지금은 시안이라 실제로 발송되지는 않으며, 가비아에 올릴 때 메일 발송 기능을 연결합니다.","Your inquiry passed all checks. This is a draft, so nothing is sent yet; email delivery will be connected when the site goes live.","内容已确认。目前为样稿，不会实际发送；正式上线时将接入邮件发送功能。"),
+ ok:T("입력 내용이 확인되었습니다. 온라인 문의 발송 기능은 준비 중입니다. 같은 내용을 inquiry@sm-cnc.kr 로 보내 주세요.","Your inquiry passed all checks. Online sending is being prepared; please email the same message to inquiry@sm-cnc.kr.","内容已确认。在线发送功能正在准备中，请将相同内容发送至 inquiry@sm-cnc.kr。"),
  copied:T("복사됨","Copied","已复制")};
 
 /* ---------- chrome ---------- */
 function renderChrome(route){
-  const g=GROUP[route]||(route==="deal"?"consulting":route);
+  const g=GROUP[route]||(route==="deal"?"consulting":route==="part"?"commerce":route);
   $("#menu").innerHTML=NAV.map(n=>n.kids?`<div class="mi${g===n.k?" on":""}"><button type="button" aria-haspopup="true">${x(U[n.k])}</button><div class="drop">${n.kids.map(k=>`<a href="#${k}"${k===route?' aria-current="page"':""}>${x(U[k])}</a>`).join("")}</div></div>`:`<div class="mi${g===n.k?" on":""}"><a href="#${n.k}">${x(U[n.k])}</a></div>`).join("");
   $("#mnavIn").innerHTML=NAV.map(n=>n.kids?`<div><b>${x(U[n.k])}</b>${n.kids.map(k=>`<a href="#${k}">${x(U[k])}</a>`).join("")}</div>`:`<div><a href="#${n.k}">${x(U[n.k])}</a></div>`).join("")+`<div><a class="btn p" href="#contact" style="display:inline-flex">${x(U.contact)}</a></div>`;
-  $("#foot").innerHTML=`<div class="fcols"><div><b>${x(T("에스엠씨앤씨 주식회사","SM Commerce & Consulting Co., Ltd.","SM Commerce & Consulting株式会社"))}</b><p>${x(ADDR)}</p><p style="margin-top:8px">daniel.nam@sm-cnc.kr</p></div>
+  $("#foot").innerHTML=`<div class="fcols"><div><b>${x(T("에스엠씨앤씨 주식회사","SM Commerce & Consulting Co., Ltd.","SM Commerce & Consulting株式会社"))}</b><p>${x(ADDR)}</p><p style="margin-top:8px">inquiry@sm-cnc.kr</p></div>
   ${NAV.map(n=>`<div><b>${x(U[n.k])}</b>${n.kids.map(k=>`<a href="#${k}">${x(U[k])}</a>`).join("")}</div>`).join("")}<div><b>${x(U.contact)}</b><a href="#contact">${x(U.contact)}</a></div></div>
   <div class="fbot"><span>© 2026 SMC&amp;C. All rights reserved.</span><span>Commerce | Consulting</span></div>`;
   document.querySelectorAll("[data-u]").forEach(el=>el.textContent=x(U[el.dataset.u]));
-  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
+  document.querySelectorAll(".lang [data-l]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
   document.documentElement.lang=L==="zh"?"zh-CN":L;
 }
 
@@ -801,6 +852,7 @@ function render(keepScroll){
   let route=h,html;
   const m=/^deal-(\d+)$/.exec(h);
   if(m){route="deal";html=P.deal(+m[1])}
+  else if(/^part-\w+$/.test(h)){route="part";html=P.part(h.slice(5))}
   else{if(!ROUTES.includes(h))route="home";html=P[route]()}
   cur=route;
   renderChrome(route);
@@ -841,12 +893,12 @@ function bindForm(){
     const f=file.files[0];chk("f-file","e-file",!f||f.size<=10485760,"size");chk("f-agree","e-agree",$("#f-agree").checked,"agree");
     const dn=$("#done");if(ok){dn.textContent=x(F.ok);dn.hidden=false}else{dn.hidden=true;const first=document.querySelector('[aria-invalid="true"]');if(first)first.focus()}};
 }
-document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{L=b.dataset.l;try{localStorage.setItem("smcc-lang",L)}catch(e){};render(true)}));
+document.querySelectorAll(".lang [data-l]").forEach(b=>b.addEventListener("click",()=>{L=b.dataset.l;try{localStorage.setItem("smcc-lang",L)}catch(e){};render(true)}));
 $("#burger").onclick=()=>{const o=$("#mnav").classList.toggle("open");$("#burger").setAttribute("aria-expanded",o)};
 document.addEventListener("click",e=>{const b=e.target.closest(".mi > button");document.querySelectorAll(".mi.open").forEach(m=>{if(!b||m!==b.parentElement)m.classList.remove("open")});if(b)b.parentElement.classList.toggle("open");if(e.target.closest(".drop a"))document.querySelectorAll(".mi.open").forEach(m=>m.classList.remove("open"))});
 document.addEventListener("visibilitychange",()=>{if(document.hidden)clearInterval(heroTimer);else if(cur==="home")bind("home")});
 window.addEventListener("hashchange",()=>render(false));
-try{const s=localStorage.getItem("smcc-lang");if(s&&["ko","en","zh"].includes(s))L=s}catch(e){}
+try{const s=localStorage.getItem("smcc-lang");if(s&&["ko","en","zh","ja"].includes(s))L=s}catch(e){}
 render(true);
 </script>
 </body>
